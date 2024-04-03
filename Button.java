@@ -39,6 +39,35 @@ public class Button{
     polygon = new Polygon(xPoints,yPoints,4);
   }
 
+  //Hexagonal Button
+  public Button(int x, int y, int d){
+    int radius = d/2;
+    xPos = x;
+    yPos = y;
+    int[] xPoints = new int[6];
+    int[] yPoints = new int[6];
+
+    int h = (int) ((radius/2) * Math.sqrt(3));
+    height = d;
+    width = h*2;
+
+    xPoints[0] = x;
+    xPoints[1] = x+h;
+    xPoints[2] = x+h;
+    xPoints[3] = x;
+    xPoints[4] = x-h;
+    xPoints[5] = x-h;
+
+    yPoints[0] = y + r;
+    yPoints[1] = y + r/2;
+    yPoints[2] = y - r/2;
+    yPoints[3] = y - r;
+    yPoints[4] = y - r/2;
+    yPoints[5] = y + r/2;
+
+    polygon = new Polygon(xPoints, yPoints, 6);
+  }
+
 
   public void paint(Graphics g){
     if(!hidden){
