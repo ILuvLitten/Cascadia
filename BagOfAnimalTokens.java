@@ -1,34 +1,35 @@
+import java.io.File;
+import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Queue;
-import java.util.ArrayList;
+import javax.imageio.ImageIO;
 import java.util.Collections;
 
 
 public class BagOfAnimalTokens {
     private ArrayList<AnimalToken> tokenList;
     
-    public BagOfAnimalTokens()
+    public BagOfAnimalTokens() throws IOException
     {
         tokenList = new ArrayList<AnimalToken>();
         // add 20 bears
         for (int i=0; i<20; i++) {
-            tokenList.add(new AnimalToken(1));
+            tokenList.add(new AnimalToken(1, ImageIO.read(new File("bearToken.png"))));
         }
         // add 20 elk
         for (int i=0; i<20; i++) {
-            tokenList.add(new AnimalToken(2));
+            tokenList.add(new AnimalToken(2, ImageIO.read(new File("elkToken.png"))));
         }
         // add 20 salmon
         for (int i=0; i<20; i++) {
-            tokenList.add(new AnimalToken(3));
+            tokenList.add(new AnimalToken(3, ImageIO.read(new File("salmonToken.png"))));
         }
         // add 20 hawks
         for (int i=0; i<20; i++) {
-            tokenList.add(new AnimalToken(4));
+            tokenList.add(new AnimalToken(4, ImageIO.read(new File("hawkToken.png"))));
         }
         // add 20 foxes
         for (int i=0; i<20; i++) {
-            tokenList.add(new AnimalToken(5));
+            tokenList.add(new AnimalToken(5, ImageIO.read(new File("foxToken.png"))));
         }
         Collections.shuffle(tokenList);
 
@@ -64,4 +65,5 @@ public class BagOfAnimalTokens {
         return t;
     }
 }
+
 
