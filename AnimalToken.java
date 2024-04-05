@@ -8,6 +8,11 @@ public class AnimalToken {
         image = img;
     }
 
+    public AnimalToken(int type) {
+        animalType = type;
+        image = null;
+    }
+
     public int getAnimalType() {
         return animalType;
     }
