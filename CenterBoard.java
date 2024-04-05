@@ -92,7 +92,15 @@ public class CenterBoard {
         // checks if all 4 available animal token are of the same type; overpopulation
         if (type1 == type2 && type1 == type3 && type1 == type4)
             overpopulation4 = true;
+
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        list.add(type1);
+        list.add(type2);
+        list.add(type3);
+        list.add(type4);
         
+        int x = 0;
+
         
     }
 
