@@ -14,7 +14,8 @@ public class CenterBoard {
         overpopulation4 = false;
         bag = new BagOfAnimalTokens();
         fillTokens();
-        //tileList.add(stack.draw)
+        stack = new TilePile();
+        fillTiles();
     }
 
     public AnimalToken[] getTokenList() {
@@ -78,6 +79,13 @@ public class CenterBoard {
         for (int i=0; i<4; i++) {
             if (tokenList[i]==null)
                 tokenList[i] = bag.draw();
+        }
+    }
+
+    public void fillTiles() {
+        for (int i=0; i<4; i++) {
+            if (tileList[i] == null)
+                tileList[i] = stack.draw();
         }
     }
 
@@ -147,4 +155,3 @@ public class CenterBoard {
         }
     }
 }
-
