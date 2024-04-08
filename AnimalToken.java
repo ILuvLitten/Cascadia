@@ -2,6 +2,7 @@ import java.awt.image.BufferedImage;
 public class AnimalToken {
     private int animalType;
     private BufferedImage image;
+    private boolean scored;
 
     public AnimalToken(int type, BufferedImage img) {
         animalType = type;
