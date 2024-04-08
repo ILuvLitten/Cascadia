@@ -13,9 +13,10 @@ public class HabitatTile {
     private boolean containsAnimal;
     private boolean animalOnTile;
     private BufferedImage image;
+    private AnimalToken token;
     private ArrayList<HabitatTile> neighbours;
 
-    public HabitatTile(int terrain1, int terrain2, boolean canHoldHawk, boolean canHoldFox, boolean canHoldBear, boolean canHoldSalmon, boolean canHoldElk, boolean isKeystone, boolean containsAnimal, boolean animalOnTile, BufferedImage image) {
+    public HabitatTile(int terrain1, int terrain2, boolean canHoldHawk, boolean canHoldFox, boolean canHoldBear, boolean canHoldSalmon, boolean canHoldElk, boolean isKeystone, BufferedImage image) {
         this.terrain1 = terrain1;
         this.terrain2 = terrain2;
         this.canHoldHawk = canHoldHawk;
@@ -24,10 +25,10 @@ public class HabitatTile {
         this.canHoldSalmon = canHoldSalmon;
         this.canHoldElk = canHoldElk;
         this.isKeystone = isKeystone;
-        this.containsAnimal = containsAnimal;
-        this.animalOnTile = animalOnTile;
+        this.containsAnimal = false;
+        this.animalOnTile = false;
         this.image = image;
-
+        this.token = null;
     }
     public int getTerrain1() {
         return terrain1;
@@ -79,5 +80,20 @@ public class HabitatTile {
     public ArrayList<HabitatTile> getNeighbours() {
         return neighbours;
     }
+    public void setToken(AnimalToken t) {
+        token = t;
+    }
+    public AnimalToken getToken() {
+        return token;
+    }
+    public boolean containsHawk() {
+        if (token!=null) {
+            if (token.getAnimalType() == 4)
+                return true;
+        }
+        return false;
+    }
 }
+
+
 
