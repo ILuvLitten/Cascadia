@@ -19,7 +19,6 @@ public class HabitatTile {
     private boolean canHoldElk;
     private boolean isKeystone;
     private boolean containsAnimal;
-    private boolean animalOnTile;
     private BufferedImage image;
     private AnimalToken token;
     private ArrayList<HabitatTile> neighbours;
@@ -40,7 +39,6 @@ public class HabitatTile {
         this.canHoldElk = canHoldElk;
         this.isKeystone = isKeystone;
         this.containsAnimal = false;
-        this.animalOnTile = false;
         this.image = image;
         this.token = null;
     }
@@ -75,9 +73,6 @@ public class HabitatTile {
     }
     public void setContainsAnimal(boolean containsAnimal) {
         this.containsAnimal = containsAnimal;
-    }
-    public boolean getAnimalOnTile() {
-        return animalOnTile;
     }
     public BufferedImage getImage() {
         return image;
