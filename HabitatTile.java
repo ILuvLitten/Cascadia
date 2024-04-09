@@ -2,8 +2,16 @@ import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
 public class HabitatTile {
+
+    private int terrain0;
     private int terrain1;
     private int terrain2;
+    private int terrain3;
+    private int terrain4;
+    private int terrain5;
+
+    private int totalTerrain1;
+    private int totalTerrain2;
     private boolean canHoldHawk;
     private boolean canHoldFox;
     private boolean canHoldBear;
@@ -17,8 +25,14 @@ public class HabitatTile {
     private ArrayList<HabitatTile> neighbours;
 
     public HabitatTile(int terrain1, int terrain2, boolean canHoldHawk, boolean canHoldFox, boolean canHoldBear, boolean canHoldSalmon, boolean canHoldElk, boolean isKeystone, BufferedImage image) {
-        this.terrain1 = terrain1;
+        this.terrain1 = terrain2;
         this.terrain2 = terrain2;
+        this.terrain3 = terrain2;
+        this.terrain0 = terrain1;
+        this.terrain4 = terrain1;
+        this.terrain5 = terrain1;
+        totalTerrain1 = terrain1;
+        totalTerrain2 = terrain2;
         this.canHoldHawk = canHoldHawk;
         this.canHoldFox = canHoldFox;
         this.canHoldBear = canHoldBear;
@@ -31,17 +45,13 @@ public class HabitatTile {
         this.token = null;
     }
     public int getTerrain1() {
-        return terrain1;
+        return totalTerrain1;
     }
-    public  void setTerrain1(int terrain1) {
-        this.terrain1 = terrain1;
-    }
+
     public int getTerrain2() {
-        return terrain2;
+        return totalTerrain2;
     }
-    public void setTerrain2(int terrain2) {
-        this.terrain2 = terrain2;
-    }
+
     public boolean getCanHoldHawk() {
         return canHoldHawk;
     }
@@ -75,7 +85,24 @@ public class HabitatTile {
     public void setImage(BufferedImage image) {
         this.image = image;
     }
-    public void rotate() {
+    public void rotateCW() {
+        int temp = terrain0;
+        terrain0 = terrain5;
+        terrain5 = terrain4;
+        terrain4 = terrain3;
+        terrain3 = terrain2;
+        terrain2 = terrain1;
+        terrain1 = temp;
+    }
+
+    public void rotateCCW() {
+        int temp = terrain0;
+        terrain0 = terrain1;
+        terrain1 = terrain2;
+        terrain2 = terrain3;
+        terrain3 = terrain4;
+        terrain4 = terrain5;
+        terrain5 = temp;
     }
     public ArrayList<HabitatTile> getNeighbours() {
         return neighbours;
