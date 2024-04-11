@@ -42,6 +42,27 @@ public class HabitatTile {
         this.image = image;
         this.token = null;
     }
+
+    public HabitatTile(int terrain1, int terrain2, boolean canHoldHawk, boolean canHoldFox, boolean canHoldBear, boolean canHoldSalmon, boolean canHoldElk, boolean isKeystone) {
+        this.terrain1 = terrain2;
+        this.terrain2 = terrain2;
+        this.terrain3 = terrain2;
+        this.terrain0 = terrain1;
+        this.terrain4 = terrain1;
+        this.terrain5 = terrain1;
+        totalTerrain1 = terrain1;
+        totalTerrain2 = terrain2;
+        this.canHoldHawk = canHoldHawk;
+        this.canHoldFox = canHoldFox;
+        this.canHoldBear = canHoldBear;
+        this.canHoldSalmon = canHoldSalmon;
+        this.canHoldElk = canHoldElk;
+        this.isKeystone = isKeystone;
+        this.containsAnimal = false;
+        this.image = image;
+        this.token = null;
+    }
+
     public int getTerrain1() {
         return totalTerrain1;
     }
@@ -108,6 +129,27 @@ public class HabitatTile {
     public AnimalToken getToken() {
         return token;
     }
+    public boolean containsBear() {
+        if (token!=null) {
+            if (token.getAnimalType() == 1)
+                return true;
+        }
+        return false;
+    }
+    public boolean containsElk() {
+        if (token!=null) {
+            if (token.getAnimalType() == 2)
+                return true;
+        }
+        return false;
+    }
+    public boolean containsSalmon() {
+        if (token!=null) {
+            if (token.getAnimalType() == 3)
+                return true;
+        }
+        return false;
+    }
     public boolean containsHawk() {
         if (token!=null) {
             if (token.getAnimalType() == 4)
@@ -115,6 +157,14 @@ public class HabitatTile {
         }
         return false;
     }
+    public boolean containsFox() {
+        if (token!=null) {
+            if (token.getAnimalType() == 5)
+                return true;
+        }
+        return false;
+    }
+
 }
 
 
