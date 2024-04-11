@@ -21,12 +21,12 @@ public class Hex {
     }
 
     public boolean getEmpty() { 
-        return empty;
+        return (ht==null);
     }
 
-    public void setEmpty(boolean b) {
-        empty = b;
-    }
+    //public void setEmpty(boolean b) {
+    //    empty = b;
+    //}
 
     public Hex(int row, int column, HabitatTile t, boolean b) {
         r = row;
@@ -39,6 +39,7 @@ public class Hex {
         r = row;
         c = column;
         empty = true;
+        ht = null;
     }
 
     public void setTile(HabitatTile t) {
@@ -51,3 +52,4 @@ public class Hex {
 
 
 }
+
