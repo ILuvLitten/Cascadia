@@ -25,4 +25,12 @@ public class AnimalToken {
     public void setImage(BufferedImage x) {
         image = x;
     }
+    
+    public void setScored(Boolean c) {
+        scored = c;
+    }
+
+    public boolean getScored() {
+        return scored;
+    }
 }
