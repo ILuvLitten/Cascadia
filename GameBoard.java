@@ -4,9 +4,9 @@ public class GameBoard {
     private int natureTokens;
 
     public GameBoard() {
-        board = new Hex[20][20];
-        for (int r=0; r<20; r++) {
-            for (int c=0; c<20; c++) {
+        board = new Hex[42][42];
+        for (int r=0; r<42; r++) {
+            for (int c=0; c<42; c++) {
                 board[r][c] = new Hex(r, c);
             }
         }
@@ -16,6 +16,7 @@ public class GameBoard {
     public boolean placeTile(int r, int c, HabitatTile tile) {
         if (board[r][c].getEmpty()) {
             board[r][c].setTile(tile);
+            //board[r][c].setEmpty(false);
             return true;
         }
         return false;
@@ -80,8 +81,8 @@ public class GameBoard {
 
     public Hex getAdjHex(int r, int c, int s) {
         int[] evenCol = {-1, -1, 0, 1, 1, 0};
-        int[] oddCol = {0, 1, 1, 1, 0, -1};
         int[] evenRow = {-1, -1, 0, 1, 1, 0};
+        int[] oddCol = {0, 1, 1, 1, 0, -1};
         int[] oddRow = {-1, -1, 0, 1, 1, 0};
         Hex h = board[r][c];
         boolean even = (r%2 == 0);
@@ -101,7 +102,7 @@ public class GameBoard {
                 }
             }
         }
-        if (c == 19) {
+        if (c == 41) {
             if(even) {
                 if (s==2)
                     return null;
@@ -111,7 +112,7 @@ public class GameBoard {
                     return null;
             }
         }
-        if (r == 19) {
+        if (r == 41) {
             if (s==3 || s==4)
                 return null;
         }
@@ -133,10 +134,6 @@ public class GameBoard {
         return list;
     }
 
-    public int calculateElk(int row, int col) {
-        int max = 0;
-        return max;
-    }
 
     // determines if the hawk at the given coordinate does not have any adjacent hawks
     public int soloHawk(int row, int col) {
@@ -153,9 +150,12 @@ public class GameBoard {
     
     public int calculateHawk() {
         int numHawk = 0;
-        for (int r=0; r<20; r++) {
-            for (int c=0; c<20; c++) {
-                numHawk += soloHawk(r, c);
+        for (int r=0; r<42; r++) {
+            for (int c=0; c<42; c++) {
+                if (!board[r][c].getEmpty()) {
+                    if (board[r][c].getTile().containsHawk()==true)
+                        numHawk += soloHawk(r, c);
+                    }
             }
         }
         if (numHawk < 1) {
@@ -179,15 +179,140 @@ public class GameBoard {
         }
     }
 
-    public int calculateElk() {
-        int scoreElk =0;
-        for (int r=0; r<20; r++) {
-            for (int c=0; c<20; c++) {
-                
+    public int calculateFox() {
+        int scoreFox =0;
+        for (int r=0; r<42; r++) {
+            for (int c=0; c<42; c++) {
+                if (board[r][c].getTile().containsFox()) {
+                    scoreFox += uniqueFox(r, c);
+                }
             }
         }
-        return scoreElk;
+        return scoreFox;
     }
 
+    public int uniqueFox(int row, int col) {
+        ArrayList<Hex> list = getAdjacents(row, col);
+        boolean adjacentBear = false;
+        boolean adjacentElk = false;
+        boolean adjacentSalmon = false;
+        boolean adjacentHawk = false;
+        boolean adjacentFox = false;
+        int total = 0;
+        for (Hex h: list) {
+            if (h.getTile()!=null) {
+                if (h.getTile().containsBear()) {
+                    adjacentBear = true;
+                }
+                if (h.getTile().containsElk()) {
+                    adjacentElk = true;
+                }
+                if (h.getTile().containsSalmon()) {
+                    adjacentSalmon = true;
+                }
+                if (h.getTile().containsHawk()) {
+                    adjacentHawk = true;
+                }
+                if (h.getTile().containsFox()) {
+                    adjacentFox = true;
+                }
+            }
+        }
+        if (adjacentBear)
+            total++;
+        if (adjacentElk)
+            total++;
+        if (adjacentSalmon)
+            total++;
+        if (adjacentHawk)
+            total++;
+        if (adjacentFox)
+            total++;
+        return total;
+    }
+
+    public int calculateBear() {
+        int numPairs = 0;
+        for (int r=0; r<42; r++) {
+            for (int c=0; c<42; c++) {
+                Hex h = board[r][c];
+                if (!h.getEmpty() && h.getTile().containsBear() && !h.getTile().getToken().getScored()) {
+                    boolean pair = pairBear(r, c);
+                    if (pair) {
+                        board[r][c].getTile().getToken().setScored(true);
+                        numPairs = numPairs + 1;
+                    }
+                }
+            }
+        }
+        if (numPairs < 1) {
+            return 0;
+        } else if (numPairs < 2) {
+            return 4;
+        } else if (numPairs < 3) {
+            return 11;
+        } else if (numPairs < 4) {
+            return 19;
+        } else {
+            return 27;
+        }
+    }
+
+    public boolean pairBear(int row, int col) {
+        ArrayList<Hex> adjacents = getAdjacents(row, col);
+        int numAdjacentBears = 0;
+        ArrayList<Hex> matches = new ArrayList<Hex>();
+        for (Hex h: adjacents) {
+            if (!h.getEmpty()) {
+                if (h.getTile().containsBear()) {
+                    if (!h.getTile().getToken().getScored()) {
+                        numAdjacentBears++;
+                        matches.add(h);
+                    }
+                }
+            }
+        }
+        if (numAdjacentBears==1) {
+            Hex match = matches.get(0);
+            ArrayList<Hex> matchAdjacents = getAdjacents(match.getRow(), match.getColumn());
+            int numAdjacentToMatch = 0;
+            for (Hex h: matchAdjacents) {
+                if (!h.getEmpty()) {
+                    if (h.getTile().containsBear()) {
+                        numAdjacentToMatch = numAdjacentToMatch + 1;
+                    }
+                }
+            }
+            if (numAdjacentToMatch==1) {
+
+                return true;
+            }
+
+        }
+        return false;
+    }
+
+    //public int calculateElk(int row, int col) {
+    //    int scoreElk = 0;
+    //    Hex h = board[row][col];
+    //    ArrayList<Hex> adjacents = getAdjacents(row, col);
+//
+    //    for (int s=2; s<6; s++) {
+    //        Hex adj = adjacents.get(s);
+    //        if( adj.getTile().containsElk()){
+    //            return 1 + calculateElk(adj.getRow(), adj.getColumn());
+    //       }
+     //   }
+
+
+
+    //} 
+
+    
+
+    public int returnNatureTokens() {
+        return natureTokens;
+    }
+    
 
 }
