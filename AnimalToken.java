@@ -7,11 +7,13 @@ public class AnimalToken {
     public AnimalToken(int type, BufferedImage img) {
         animalType = type;
         image = img;
+        scored = false;
     }
 
     public AnimalToken(int type) {
         animalType = type;
         image = null;
+        scored = false;
     }
 
     public int getAnimalType() {
@@ -25,7 +27,7 @@ public class AnimalToken {
     public void setImage(BufferedImage x) {
         image = x;
     }
-    
+
     public void setScored(Boolean c) {
         scored = c;
     }
