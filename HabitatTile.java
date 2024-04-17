@@ -157,7 +157,7 @@ public class HabitatTile {
         }
         return false;
     }
-    public boolean containsFox() {
+    public boolean containsFox(){
         if (token!=null) {
             if (token.getAnimalType() == 5)
                 return true;
