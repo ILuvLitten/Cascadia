@@ -239,31 +239,47 @@ public class GameBoard {
         return total;
     }
 
+    public int calculateElk() {
+        int score = 0;
+        for (int r = 0; r<42; r++) {
+            for (int c = 0; c<42; c++) {
+                Hex h = board[r][c];
+                if (!h.getEmpty() && h.getTile().containsElk() && !h.getTile().getToken().getScored()) {
+                    int runSize = elkRun(r, c)+1;
+                    if (runSize < 1) {
+                        score += 0;
+                    } else if (runSize < 2) {
+                        score += 2;
+                    } else if (runSize < 3) {
+                        score += 4;
+                    } else if (runSize < 4) {
+                        score += 7;
+                    } else if (runSize < 5) {
+                        score += 10;
+                    } else if (runSize < 6) {
+                        score += 14;
+                    } else if (runSize < 7) {
+                        score += 18;
+                    } else if (runSize < 8) {
+                        score += 23;
+                    } else {
+                        score += 28;
+                    }
+                }
+            }
+        }
+        return score;
+    }
+
     public int calculateSalmon() {
         int score = 0;
         for (int r=0; r<42; r++) {
-            //out.println(r + " is " + board[5][1].getTile().getToken().getScored());
             for (int c=0; c<42; c++) {
-                //if (r<5)
-                    //out.println(r + " " + c  + " " + board[5][1].getTile().getToken().getScored());
                 Hex h = board[r][c];
-                if (r == 5 && c == 1) {
-                   // out.println("5 1 " + h.getTile().getToken().getScored());
-                }
-                if (!h.getEmpty()) {
-                    out.println(r + " " + c + " not empty");
-                    if (h.getTile().containsSalmon()) {
-                        out.println(r + " " + c + " contains salmon");
-                        if (!h.getTile().getToken().getScored()) {
-                            out.println(r + " " + c + " not scored");
-                        }
-                    }
-                }
                 if (!h.getEmpty() && h.getTile().containsSalmon() && !h.getTile().getToken().getScored()) {
                     int numAdjSalmon = 0;
                     int side = 0;
                     ArrayList<Hex> adjacentSalmons = new ArrayList<Hex>();
-                    //out.println(r + " " + c);
                     for (int i=0; i<6; i++) {
                         Hex spot = getAdjHex(r, c, i);
                         if (spot!=null && !spot.getEmpty()) {
@@ -300,9 +316,7 @@ public class GameBoard {
                     }
                     if (numAdjSalmon == 2) {
                         Hex firstSalmon = adjacentSalmons.get(0);
-                        //out.println("adjacentone " + r + " " + c + " row and column: " + firstSalmon.getRow() + " " + firstSalmon.getColumn());
                         Hex secondSalmon = adjacentSalmons.get(1);
-                        //out.println("adjacenttwo " + r + " " + c + " row and column: " + secondSalmon.getRow() + " " + secondSalmon.getColumn());
                         if (findTypeAdjacent(firstSalmon)<=2 && findTypeAdjacent(secondSalmon)<=2) {
                             score += 8;
                             board[r][c].getTile().getToken().setScored(true);
@@ -331,16 +345,27 @@ public class GameBoard {
         return cnt;
     }
 
+    public int elkRun(int r, int c) {
+        int cnt = 0;
+        board[r][c].getTile().getToken().setScored(true);
+        for (int i=0; i<6; i++) {
+            Hex spot = getAdjHex(r, c, i);
+            if (spot!=null && !spot.getEmpty()) {
+                if (spot.getTile().containsElk() && !spot.getTile().getToken().getScored()) {
+                    cnt += 1 + elkRun(spot.getRow(), spot.getColumn());
+                }
+            }
+        }
+        return cnt;
+    }
+
     public int runSize(int r, int c) {
-        int side = 0;
         ArrayList<Hex> adjacentSalmons = new ArrayList<Hex>();
         board[r][c].getTile().getToken().setScored(true);
         for (int i=0; i<6; i++) {
                 Hex spot = getAdjHex(r, c, i);
                 if (spot!=null && !spot.getEmpty()) {
                     if (spot.getTile().containsSalmon() && !spot.getTile().getToken().getScored()) {
-                        //numAdjSalmon++;
-                        side = i;
                         adjacentSalmons.add(spot);
                     }
                 }
@@ -356,11 +381,28 @@ public class GameBoard {
 
     public boolean adjacentRun(int r, int c, int s) {
         Hex hexagon = board[r][c];
-        //int numAdjSalmon = 0;
         int side = 0;
         int blockedSide = s + 3;
         if (blockedSide == 6) {
             blockedSide = 0;
+        }
+        if (s==0) {
+            blockedSide = 3;
+        }
+        if (s==1) {
+            blockedSide = 4;
+        }
+        if (s==2) {
+            blockedSide = 5;
+        }
+        if (s==3) {
+            blockedSide = 0;
+        }
+        if (s==4) {
+            blockedSide = 1;
+        }
+        if (s==5) {
+            blockedSide = 2;
         }
         ArrayList<Hex> adjacentSalmons = new ArrayList<Hex>();
         for (int i=0; i<6; i++) {
@@ -368,7 +410,6 @@ public class GameBoard {
                 Hex spot = getAdjHex(r, c, i);
                 if (spot!=null && !spot.getEmpty()) {
                     if (spot.getTile().containsSalmon() && !spot.getTile().getToken().getScored()) {
-                        //numAdjSalmon++;
                         side = i;
                         adjacentSalmons.add(spot);
                     }
@@ -420,21 +461,12 @@ public class GameBoard {
         ArrayList<Hex> adjacents = getAdjacents(row, col);
         int numAdjacentBears = 0;
         ArrayList<Hex> matches = new ArrayList<Hex>();
-        if (row==2 && col==1) {
-            //out.println("calculating " + row + " " + col);
-        }
         for (Hex h: adjacents) {
             if (h!=null && !h.getEmpty()) {
                 if (h.getTile().containsBear()) {
-                    if (row==2 && col==1) {
-                        //out.println(h.getRow() + " " + h.getColumn() + "contains bear");
-                        //out.println("done");
-                    }
-                    //out.println(h.getTile().getToken().getAnimalType());
                     if (!h.getTile().getToken().getScored()) {
                         numAdjacentBears++;
                         matches.add(h);
-                        //out.println(row + " " + col + "passed");
                     }
                 }
             }
@@ -459,11 +491,269 @@ public class GameBoard {
         return false;
     }
 
+    public int calculateMountain() {
+        int max = 0;
+        for (int r = 0; r < 42; r++) {
+            for (int c = 0; c < 42; c++) {
+                Hex h = board[r][c];
+                if (!h.getEmpty() && !h.getTile().getMountainChecked()) {
+                    if (h.getTile().getTotalTerrain1()==1 || h.getTile().getTotalTerrain2()==1) {
+                        int size = 1 + mountainCorridor(r, c);
+                        if (size > max) {
+                            max = size;
+                        }
+                    }
+                }
+            }
+        }
+        return max;
+    }
+
+    public int calculateForest() {
+        int max = 0;
+        for (int r = 0; r < 42; r++) {
+            for (int c = 0; c < 42; c++) {
+                Hex h = board[r][c];
+                if (!h.getEmpty() && !h.getTile().getForestChecked()) {
+                    if (h.getTile().getTotalTerrain1()==2 || h.getTile().getTotalTerrain2()==2) {
+                        int size = 1 + forestCorridor(r, c);
+                        if (size > max) {
+                            max = size;
+                        }
+                    }
+                }
+            }
+        }
+        return max;
+    }
+
+    public int calculatePrairie() {
+        int max = 0;
+        for (int r = 0; r < 42; r++) {
+            for (int c = 0; c < 42; c++) {
+                Hex h = board[r][c];
+                if (!h.getEmpty() && !h.getTile().getPrairieChecked()) {
+                    if (h.getTile().getTotalTerrain1()==3 || h.getTile().getTotalTerrain2()==3) {
+                        int size = 1 + prairieCorridor(r, c);
+                        if (size > max) {
+                            max = size;
+                        }
+                    }
+                }
+            }
+        }
+        return max;
+    }
+
+    public int calculateWetland() {
+        int max = 0;
+        for (int r = 0; r < 42; r++) {
+            for (int c = 0; c < 42; c++) {
+                Hex h = board[r][c];
+                if (!h.getEmpty() && !h.getTile().getWetlandChecked()) {
+                    // checks if tile at [r][c] contains wetland terrain
+                    if (h.getTile().getTotalTerrain1()==4 || h.getTile().getTotalTerrain2()==4) {
+                        // calculates size of corridor
+                        int size = 1 + wetlandCorridor(r, c);
+                        if (size > max) {
+                            max = size;
+                        }
+                    }
+                }
+            }
+        }
+        return max;
+    }
+
+    public int calculateRiver() {
+        int max = 0;
+        for (int r = 0; r < 42; r++) {
+            for (int c = 0; c < 42; c++) {
+                Hex h = board[r][c];
+                if (!h.getEmpty() && !h.getTile().getRiverChecked()) {
+                    if (h.getTile().getTotalTerrain1()==5 || h.getTile().getTotalTerrain2()==5) {
+                        int size = 1 + riverCorridor(r, c);
+                        if (size > max) {
+                            max = size;
+                        }
+                    }
+                }
+            }
+        }
+        return max;
+    }
+
+    public int mountainCorridor(int r, int c) {
+        board[r][c].getTile().setMountainChecked(true);
+        int cnt = 0;
+        for (int i=0; i<6; i++) {
+            int x = i+3;
+            if (i==0) {
+                x = 3;
+            }
+            if (i==1) {
+                x = 4;
+            }
+            if (i==2) {
+                x = 5;
+            }
+            if (i==3) {
+                x = 0;
+            }
+            if (i==4) {
+                x = 1;
+            }
+            if (i==5) {
+                x = 2;
+            }
+            Hex spot = getAdjHex(r, c, i);
+            if (spot != null && !spot.getEmpty()) {
+                if (spot.getTile().getTerrain(x)==1 && !spot.getTile().getMountainChecked()) {
+                    cnt += 1 + mountainCorridor(spot.getRow(), spot.getColumn());
+                }
+            }
+        }
+        return cnt;
+    }
+
+    public int forestCorridor(int r, int c) {
+        board[r][c].getTile().setForestChecked(true);
+        int cnt = 0;
+        for (int i=0; i<6; i++) {
+            int x = i+3;
+            if (i==0) {
+                x = 3;
+            }
+            if (i==1) {
+                x = 4;
+            }
+            if (i==2) {
+                x = 5;
+            }
+            if (i==3) {
+                x = 0;
+            }
+            if (i==4) {
+                x = 1;
+            }
+            if (i==5) {
+                x = 2;
+            }
+            Hex spot = getAdjHex(r, c, i);
+            if (spot != null && !spot.getEmpty()) {
+                if (spot.getTile().getTerrain(x)==2 && !spot.getTile().getForestChecked()) {
+                    cnt += 1 + forestCorridor(spot.getRow(), spot.getColumn());
+                }
+            }
+        }
+        return cnt;
+    }
+
+    public int prairieCorridor(int r, int c) {
+        board[r][c].getTile().setPrairieChecked(true);
+        int cnt = 0;
+        for (int i=0; i<6; i++) {
+            int x = i+3;
+            if (i==0) {
+                x = 3;
+            }
+            if (i==1) {
+                x = 4;
+            }
+            if (i==2) {
+                x = 5;
+            }
+            if (i==3) {
+                x = 0;
+            }
+            if (i==4) {
+                x = 1;
+            }
+            if (i==5) {
+                x = 2;
+            }
+            Hex spot = getAdjHex(r, c, i);
+            if (spot != null && !spot.getEmpty()) {
+                if (spot.getTile().getTerrain(x)==3 && !spot.getTile().getPrairieChecked()) {
+                    cnt += 1 + prairieCorridor(spot.getRow(), spot.getColumn());
+                }
+            }
+        }
+        return cnt;
+    }
+
+    public int wetlandCorridor(int r, int c) {
+        board[r][c].getTile().setWetlandChecked(true);
+        int cnt = 0;
+        for (int i=0; i<6; i++) {
+            int x = i+3;
+            if (i==0) {
+                x = 3;
+            }
+            if (i==1) {
+                x = 4;
+            }
+            if (i==2) {
+                x = 5;
+            }
+            if (i==3) {
+                x = 0;
+            }
+            if (i==4) {
+                x = 1;
+            }
+            if (i==5) {
+                x = 2;
+            }
+            Hex spot = getAdjHex(r, c, i);
+            if (spot != null && !spot.getEmpty()) {
+                if (spot.getTile().getTerrain(x)==4 && !spot.getTile().getWetlandChecked()) {
+                    cnt += 1 + wetlandCorridor(spot.getRow(), spot.getColumn());
+                }
+            }
+        }
+        return cnt;
+    }
+
+    public int riverCorridor(int r, int c) {
+        board[r][c].getTile().setRiverChecked(true);
+        int cnt = 0;
+        for (int i=0; i<6; i++) {
+            int x = i+3;
+            if (i==0) {
+                x = 3;
+            }
+            if (i==1) {
+                x = 4;
+            }
+            if (i==2) {
+                x = 5;
+            }
+            if (i==3) {
+                x = 0;
+            }
+            if (i==4) {
+                x = 1;
+            }
+            if (i==5) {
+                x = 2;
+            }
+            Hex spot = getAdjHex(r, c, i);
+            if (spot != null && !spot.getEmpty()) {
+                if (spot.getTile().getTerrain(x)==5 && !spot.getTile().getRiverChecked()) {
+                    cnt += 1 + riverCorridor(spot.getRow(), spot.getColumn());
+                }
+            }
+        }
+        return cnt;
+    }
 
 
-    public int returnNatureTokens() {
+
+    public int getNatureTokens() {
         return natureTokens;
     }
     
 
 }
+
