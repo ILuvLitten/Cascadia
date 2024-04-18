@@ -22,6 +22,11 @@ public class HabitatTile {
     private BufferedImage image;
     private AnimalToken token;
     private ArrayList<HabitatTile> neighbours;
+    private boolean mountainChecked;
+    private boolean forestChecked;
+    private boolean prairieChecked;
+    private boolean wetlandChecked;
+    private boolean riverChecked;
 
     public HabitatTile(int terrain1, int terrain2, boolean canHoldHawk, boolean canHoldFox, boolean canHoldBear, boolean canHoldSalmon, boolean canHoldElk, boolean isKeystone, BufferedImage image) {
         this.terrain1 = terrain2;
@@ -41,6 +46,11 @@ public class HabitatTile {
         this.containsAnimal = false;
         this.image = image;
         this.token = null;
+        mountainChecked = false;
+        forestChecked = false;
+        prairieChecked = false;
+        wetlandChecked = false;
+        riverChecked = false;
     }
 
     public HabitatTile(int terrain1, int terrain2, boolean canHoldHawk, boolean canHoldFox, boolean canHoldBear, boolean canHoldSalmon, boolean canHoldElk, boolean isKeystone) {
@@ -61,14 +71,60 @@ public class HabitatTile {
         this.containsAnimal = false;
         this.image = image;
         this.token = null;
+        mountainChecked = false;
+        forestChecked = false;
+        prairieChecked = false;
+        wetlandChecked = false;
+        riverChecked = false;
     }
 
-    public int getTerrain1() {
+    public int getTotalTerrain1() {
         return totalTerrain1;
     }
 
-    public int getTerrain2() {
+    public int getTotalTerrain2() {
         return totalTerrain2;
+    }
+
+    public int getTerrain0() {
+        return terrain0;
+    }
+
+    public int getTerrain1() {
+        return terrain1;
+    }
+
+    public int getTerrain2() {
+        return terrain2;
+    }
+
+    public int getTerrain3() {
+        return terrain3;
+    }
+
+    public int getTerrain4() {
+        return terrain4;
+    }
+
+    public int getTerrain5() {
+        return terrain5;
+    }
+    public int getTerrain(int type) {
+        if (type==0) {
+            return terrain0;
+        } else if (type==1) {
+            return terrain1;
+        } else if (type==2) {
+            return terrain2;
+        } else if (type==3) {
+            return terrain3;
+        } else if (type==4) {
+            return terrain4;
+        } else if (type==5) {
+            return terrain5;
+        } else {
+            return -1;
+        }
     }
 
     public boolean getCanHoldHawk() {
@@ -94,6 +150,36 @@ public class HabitatTile {
     }
     public void setContainsAnimal(boolean containsAnimal) {
         this.containsAnimal = containsAnimal;
+    }
+    public void setMountainChecked(boolean b) {
+        mountainChecked = b;
+    }
+    public void setForestChecked(boolean b) {
+        forestChecked = b;
+    }
+    public void setPrairieChecked(boolean b) {
+        prairieChecked = b;
+    }
+    public void setWetlandChecked(boolean b) {
+        wetlandChecked = b;
+    }
+    public void setRiverChecked(boolean b) {
+        riverChecked = b;
+    }
+    public boolean getMountainChecked() {
+        return mountainChecked;
+    }
+    public boolean getForestChecked() {
+        return forestChecked;
+    }
+    public boolean getPrairieChecked() {
+        return prairieChecked;
+    }
+    public boolean getWetlandChecked() {
+        return wetlandChecked;
+    }
+    public boolean getRiverChecked() {
+        return riverChecked;
     }
     public BufferedImage getImage() {
         return image;
