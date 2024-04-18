@@ -17,6 +17,6 @@ public class Player {
   
     public Score getScoreCard() {
         return scoreCard;
-
+    }
     
 }
