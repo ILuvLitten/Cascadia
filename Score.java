@@ -13,8 +13,11 @@ public class Score {
     private int prairieScore;
     private int forestScore;
     private int wetlandScore;
+    private int natureTokens;
+    private GameBoard b;
 
-    public Score() {
+    public Score(GameBoard b) {
+        this.b = b;
         bearScore = 0;
         salmonScore = 0;
         foxScore = 0;
@@ -27,7 +30,7 @@ public class Score {
         forestScore = 0;
         wetlandScore = 0;
     }
-    public void calcBearScore(GameBoard b){
+    public void calcBearScore(){
         Hex[][] board = b.getBoard();
         int numPairs = 0;
         int num = 0;
@@ -58,18 +61,18 @@ public class Score {
         }
         bearScore = num;
     }
-    public void calcSalmonScore(GameBoard b){
+    public void calcSalmonScore(){
         Hex[][] board = b.getBoard();
         int num = 0;
         for (int r=0; r<42; r++) {
             for (int c=0; c<42; c++) {
                 Hex h = board[r][c];
                 if (!h.getEmpty()) {
-                    out.println(r + " " + c + " not empty");
+                    //out.println(r + " " + c + " not empty");
                     if (h.getTile().containsSalmon()) {
-                        out.println(r + " " + c + " contains salmon");
+                        //out.println(r + " " + c + " contains salmon");
                         if (!h.getTile().getToken().getScored()) {
-                            out.println(r + " " + c + " not scored");
+                            //out.println(r + " " + c + " not scored");
                         }
                     }
                 }
@@ -129,7 +132,7 @@ public class Score {
         }
         salmonScore = num;
     }
-    public void calcFoxScore(GameBoard b){
+    public void calcFoxScore(){
         int num = 0;
         Hex[][] board = b.getBoard();
         for (int r=0; r<42; r++) {
@@ -141,7 +144,7 @@ public class Score {
         }
         foxScore = num;
     }
-    public void calcHawkScore(GameBoard b){
+    public void calcHawkScore(){
         Hex[][] board = b.getBoard();
         int numHawk = 0;
         for (int r=0; r<42; r++) {
@@ -172,26 +175,29 @@ public class Score {
             hawkScore = 28;
         }
     }
-    public void calcElkScore(GameBoard b){
-        
+    public void calcElkScore(){
+        elkScore = b.calculateElk();
     }
     public void calcTotalScore(){
-        totalScore = bearScore + salmonScore + foxScore + hawkScore + elkScore + mountainScore + riverScore + prairieScore + forestScore + wetlandScore;
+        totalScore = bearScore + salmonScore + foxScore + hawkScore + elkScore + mountainScore + riverScore + prairieScore + forestScore + wetlandScore + natureTokens;
     }
     public void calcMountainScore(){
-
+        mountainScore = b.calculateMountain();
     }
     public void calcRiverScore(){
-
+        riverScore = b.calculateRiver();
     }
     public void calcPrairieScore(){
-
+        prairieScore = b.calculatePrairie();
     }
     public void calcForestScore(){
-
+        forestScore = b.calculateForest();
     }
     public void calcWetlandScore(){
-
+        wetlandScore = b.calculateWetland();
+    }
+    public void calcNatureTokens() {
+        natureTokens = b.getNatureTokens();
     }
     public int getBearScore() {
         return bearScore;
@@ -226,5 +232,9 @@ public class Score {
     public int getWetlandScore() {
         return wetlandScore;
     }
+    public int getNatureTokens() {
+        return natureTokens;
+    }
 
 }
+
