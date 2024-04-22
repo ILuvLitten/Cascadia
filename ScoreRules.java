@@ -1,20 +1,25 @@
 import javax.imageio.ImageIO;
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
 
 public class ScoreRules {
 
-    private BufferedImage bearRuleImg;
-    private BufferedImage salmonRuleImg;
-    private BufferedImage hawkRuleImg;
-    private BufferedImage foxRuleImg;
-    private BufferedImage elkRuleImg;
+    private BufferedImage currImg;
+    private BufferedImage currImgHalf;
 
-    private BufferedImage bearRuleImgHalf;
-    private BufferedImage salmonRuleImgHalf;
-    private BufferedImage hawkRuleImgHalf;
-    private BufferedImage foxRuleImgHalf;
-    private BufferedImage elkRuleImgHalf;
+
+    private final BufferedImage bearRuleImg = ImageIO.read(ScoreRules.class.getResource("/images/bearA.png"));;
+    private final BufferedImage salmonRuleImg = ImageIO.read(ScoreRules.class.getResource("/images/salmonA.png"));;
+    private final BufferedImage hawkRuleImg= ImageIO.read(ScoreRules.class.getResource("/images/hawkA.png"));;
+    private final BufferedImage foxRuleImg = ImageIO.read(ScoreRules.class.getResource("/images/foxA.png"));;
+    private final BufferedImage elkRuleImg  = ImageIO.read(ScoreRules.class.getResource("/images/elkC.png"));;
+
+    private final BufferedImage bearRuleImgHalf = ImageIO.read(ScoreRules.class.getResource("/images/bearAHalf.png"));;
+    private final BufferedImage salmonRuleImgHalf = ImageIO.read(ScoreRules.class.getResource("/images/salmonAHalf.png"));;
+    private final BufferedImage hawkRuleImgHalf = ImageIO.read(ScoreRules.class.getResource("/images/hawkAHalf.png"));;
+    private final BufferedImage foxRuleImgHalf = ImageIO.read(ScoreRules.class.getResource("/images/foxAHalf.png"));;
+    private final BufferedImage elkRuleImgHalf = ImageIO.read(ScoreRules.class.getResource("/images/elkCHalf.png"));;
 
     private int bearRule;
     private int salmonRule;
@@ -25,45 +30,53 @@ public class ScoreRules {
 
 
 
-    public ScoreRules(int bear, int salmon, int hawk, int fox, int elk)
+    public ScoreRules(int animalType) //1=bear, 2=salmon, 3= hawk, 4=fox, 5=elk
     {
-        try
-        {
-            bearRuleImg = ImageIO.read(ScoreRules.class.getResource("/images/bearA.png"));
-            bearRuleImgHalf = ImageIO.read(ScoreRules.class.getResource("/images/bearAHalf.png"));
-            foxRuleImg = ImageIO.read(ScoreRules.class.getResource("/images/foxA.png"));
-            foxRuleImgHalf = ImageIO.read(ScoreRules.class.getResource("/images/foxAHalf.png"));
-            hawkRuleImg = ImageIO.read(ScoreRules.class.getResource("/images/hawkA.png"));
-            hawkRuleImgHalf = ImageIO.read(ScoreRules.class.getResource("/images/hawkAHalf.png"));
-            elkRuleImg = ImageIO.read(ScoreRules.class.getResource("/images/elkC.png"));
-            elkRuleImgHalf = ImageIO.read(ScoreRules.class.getResource("/images/elkCHalf.png"));
-            salmonRuleImg = ImageIO.read(ScoreRules.class.getResource("/images/salmonA.png"));
-            salmonRuleImgHalf = ImageIO.read(ScoreRules.class.getResource("/images/salmonAHalf.png"));
-
-
+        if (animalType == 1){
+            currImg = bearRuleImg;
+            currImgHalf = bearRuleImgHalf;
         }
-        catch( Exception E)
-        {
-            System.out.println("Exception Error");
-            return;
+        else if (animalType == 2){
+            currImg = salmonRuleImg;
+            currImgHalf = salmonRuleImgHalf;
         }
-        bearRule = bear; //1 for default
-        salmonRule = salmon; //1 for default
-        hawkRule = hawk; //1 for default
-        foxRule = fox; //1 for default
-        elkRule = elk; //3 for default
+        else if (animalType == 3){
+            currImg = hawkRuleImg;
+            currImgHalf = hawkRuleImgHalf;
+        }
+        else if (animalType == 4){
+            currImg = foxRuleImg;
+            currImgHalf = foxRuleImgHalf;
+        }
+        else if (animalType == 5){
+            currImg = elkRuleImg;
+            currImgHalf = elkRuleImgHalf;
+        }
 
 
     }
 
-    public getBearRule()
+    public BufferedImage getCurrImg()
     {
-
+        return currImg;
     }
 
-    public void paint(Graphics g)
+    public BufferedImage getCurrImgHalf
     {
-        g.drawImage(bearRuleImg, 0, 0, bearRule, bearRule, null);
+        return currImgHalf
+    }
+
+
+    public void paint(Graphics g, int x, int y, int width, int height, boolean half)
+    {
+        if (half)
+        {
+            g.drawImage(this.currImgHalf, x, y, width, height, null);
+        }
+        else {
+            g.drawImage(this.currImg, x, y, width, height, null);
+        }
+
     }
 
 

@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.awt.image.BufferedImage;
 public class AnimalToken {
     private int animalType;
@@ -34,5 +35,9 @@ public class AnimalToken {
 
     public boolean getScored() {
         return scored;
+    }
+
+    public void paint (Graphics g, int x, int y, int width, int height) {
+        g.drawImage(this.image, x, y, width, height, null);
     }
 }

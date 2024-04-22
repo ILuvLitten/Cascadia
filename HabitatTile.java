@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.awt.image.BufferedImage;
 import java.util.ArrayList;
 
@@ -249,6 +250,12 @@ public class HabitatTile {
                 return true;
         }
         return false;
+    }
+
+
+    public void paint (Graphics g, int x, int y, int width, int height) {
+        g.drawImage(this.image, x, y, width, height, null);
+        //need to add the rotate and stuff so might need to change this one
     }
 
 }
