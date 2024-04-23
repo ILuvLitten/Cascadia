@@ -29,7 +29,7 @@ public class HabitatTile {
     private boolean wetlandChecked;
     private boolean riverChecked;
 
-    public HabitatTile(int terrain1, int terrain2, boolean canHoldHawk, boolean canHoldFox, boolean canHoldBear, boolean canHoldSalmon, boolean canHoldElk, boolean isKeystone, BufferedImage image) {
+    public HabitatTile(int terrain1, int terrain2, boolean canHoldBear, boolean canHoldElk, boolean canHoldSalmon, boolean canHoldHawk, boolean canHoldFox, boolean isKeystone, BufferedImage image) {
         this.terrain1 = terrain2;
         this.terrain2 = terrain2;
         this.terrain3 = terrain2;
@@ -54,7 +54,7 @@ public class HabitatTile {
         riverChecked = false;
     }
 
-    public HabitatTile(int terrain1, int terrain2, boolean canHoldHawk, boolean canHoldFox, boolean canHoldBear, boolean canHoldSalmon, boolean canHoldElk, boolean isKeystone) {
+    public HabitatTile(int terrain1, int terrain2, boolean canHoldBear, boolean canHoldElk, boolean canHoldSalmon, boolean canHoldHawk, boolean canHoldFox, boolean isKeystone) {
         this.terrain1 = terrain2;
         this.terrain2 = terrain2;
         this.terrain3 = terrain2;
