@@ -18,6 +18,14 @@ public class GameBoard {
         return board;
     }
 
+    public void addStarterTile(StarterTile st) {
+        ArrayList<HabitatTile> stSections = st.getListOfTiles();
+        placeTile(20, 21, stSections.get(0));
+        placeTile(21, 20, stSections.get(1));
+        placeTile(21, 21, stSections.get(2));
+    }
+
+
     public boolean placeTile(int r, int c, HabitatTile tile) {
         if (board[r][c].getEmpty()) {
             board[r][c].setTile(tile);
@@ -142,6 +150,18 @@ public class GameBoard {
         return list;
     }
 
+    public boolean getOpen(int r, int c) {
+        boolean tileAdjacent = false;
+        ArrayList<Hex> adjacents = getAdjacents(r, c);
+        for (int i=0; i<6; i++) {
+            if (adjacents.get(i) != null){
+                if (!adjacents.get(i).getEmpty()) {
+                    tileAdjacent = true;
+                }
+            }
+        }
+        return (board[r][c].getEmpty() && tileAdjacent);
+    }
 
     // determines if the hawk at the given coordinate does not have any adjacent hawks
     public int soloHawk(int row, int col) {
