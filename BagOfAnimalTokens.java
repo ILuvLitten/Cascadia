@@ -56,19 +56,26 @@ public class BagOfAnimalTokens {
         Collections.shuffle(tokenList);
     }
 
+    // returns x amount of Animal tokens if list is not empty
     public ArrayList<AnimalToken> draw(int x) {
-        ArrayList<AnimalToken> list = new ArrayList<AnimalToken>();
-        for (int i=0; i<x; i++) {
-            list.add(tokenList.remove(0));
+        if (!tokenList.isEmpty()) {
+            ArrayList<AnimalToken> list = new ArrayList<AnimalToken>();
+            for (int i=0; i<x; i++) {
+                list.add(draw());
+            }
+            Collections.shuffle(tokenList);
+            return list;
         }
-        Collections.shuffle(tokenList);
-        return list;
+        return null;
     }
 
     public AnimalToken draw() {
-        AnimalToken t = tokenList.remove(0);
-        Collections.shuffle(tokenList);
-        return t;
+        if (!tokenList.isEmpty()) {
+            AnimalToken t = tokenList.remove(0);
+            Collections.shuffle(tokenList);
+            return t;
+        }
+        return null;
     }
 
     public int numBearLeft() {
