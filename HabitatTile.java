@@ -1,6 +1,9 @@
 import java.awt.*;
 import java.awt.image.BufferedImage;
+import java.io.File;
+import java.io.FileNotFoundException;
 import java.util.ArrayList;
+import java.util.*;
 
 public class HabitatTile {
 
@@ -10,6 +13,14 @@ public class HabitatTile {
     private int terrain3;
     private int terrain4;
     private int terrain5;
+
+
+
+
+
+
+
+
 
     private int totalTerrain1;
     private int totalTerrain2;
@@ -29,7 +40,7 @@ public class HabitatTile {
     private boolean wetlandChecked;
     private boolean riverChecked;
 
-    public HabitatTile(int terrain1, int terrain2, boolean canHoldBear, boolean canHoldElk, boolean canHoldSalmon, boolean canHoldHawk, boolean canHoldFox, boolean isKeystone, BufferedImage image) {
+    public HabitatTile(boolean isKeystone, int terrain1, int terrain2, boolean canHoldBear, boolean canHoldElk, boolean canHoldSalmon, boolean canHoldHawk, boolean canHoldFox, BufferedImage image) throws FileNotFoundException {
         this.terrain1 = terrain2;
         this.terrain2 = terrain2;
         this.terrain3 = terrain2;
@@ -54,7 +65,7 @@ public class HabitatTile {
         riverChecked = false;
     }
 
-    public HabitatTile(int terrain1, int terrain2, boolean canHoldBear, boolean canHoldElk, boolean canHoldSalmon, boolean canHoldHawk, boolean canHoldFox, boolean isKeystone) {
+    public HabitatTile(int terrain1, int terrain2, boolean canHoldBear, boolean canHoldElk, boolean canHoldSalmon, boolean canHoldHawk, boolean canHoldFox, boolean isKeystone) throws FileNotFoundException {
         this.terrain1 = terrain2;
         this.terrain2 = terrain2;
         this.terrain3 = terrain2;
@@ -232,8 +243,10 @@ public class HabitatTile {
     }
     public boolean containsSalmon() {
         if (token!=null) {
-            if (token.getAnimalType() == 3)
+            if (token.getAnimalType() == 3){
                 return true;
+            }
+
         }
         return false;
     }
