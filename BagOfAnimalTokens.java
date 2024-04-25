@@ -70,6 +70,56 @@ public class BagOfAnimalTokens {
         Collections.shuffle(tokenList);
         return t;
     }
+
+    public int numBearLeft() {
+        int cnt = 0;
+        for (AnimalToken t: tokenList) {
+            if (t.getAnimalType()==1) {
+                cnt ++;
+            }
+        }
+        return cnt;
+    }
+
+    public int numElkLeft() {
+        int cnt = 0;
+        for (AnimalToken t: tokenList) {
+            if (t.getAnimalType()==2) {
+                cnt ++;
+            }
+        }
+        return cnt;
+    }
+
+    public int numSalmonLeft() {
+        int cnt = 0;
+        for (AnimalToken t: tokenList) {
+            if (t.getAnimalType()==3) {
+                cnt ++;
+            }
+        }
+        return cnt;
+    }
+
+    public int numHawkLeft() {
+        int cnt = 0;
+        for (AnimalToken t: tokenList) {
+            if (t.getAnimalType()==4) {
+                cnt ++;
+            }
+        }
+        return cnt;
+    }
+
+    public int numFoxLeft() {
+        int cnt = 0;
+        for (AnimalToken t: tokenList) {
+            if (t.getAnimalType()==5) {
+                cnt ++;
+            }
+        }
+        return cnt;
+    }
 }
 
 
