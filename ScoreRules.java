@@ -30,7 +30,7 @@ public class ScoreRules {
 
 
 
-    public ScoreRules(int animalType) //1=bear, 2=salmon, 3= hawk, 4=fox, 5=elk
+    public ScoreRules(int animalType) throws IOException //1=bear, 2=salmon, 3= hawk, 4=fox, 5=elk
     {
         if (animalType == 1){
             currImg = bearRuleImg;

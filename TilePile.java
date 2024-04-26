@@ -1,6 +1,8 @@
+import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.util.Scanner;
@@ -11,7 +13,7 @@ public class TilePile {
     Scanner kb = new Scanner(new File("Text File for Images Cascadia.txt"));
 
 
-    public TilePile() throws FileNotFoundException {
+    public TilePile() throws IOException {
         pile = new ArrayList<HabitatTile>();
         HabitatTile x;
         int numSet2 =0;
@@ -34,16 +36,16 @@ public class TilePile {
         String temp3;
         String temp4;
         String temp5;
-
-        int terr1;
-        int terr2;
+        BufferedImage tempIMG;
+        int terr1=0;
+        int terr2 =0;
 
         while (kb.hasNextLine()) {
             String line = kb.nextLine();      //"0-12345-12345-12345"
 
             String[] arr = line.split("-");
 
-
+            tempIMG = ImageIO.read(TilePile.class.getResource("/images/" + line + ".png"));
             numSet1 = Integer.parseInt(arr[0]);
             numSet2 = Integer.parseInt(arr[1]);
             numSet3 = Integer.parseInt(arr[2]);
@@ -126,7 +128,7 @@ public class TilePile {
             }
 
 //line =
-            x= new Tile(forKey, terr1, terr2, forBear, forElk, forSalmon, forHawk, forFox, TILEIMAGE)
+            x= new HabitatTile(forKey, terr1, terr2, forBear, forElk, forSalmon, forHawk, forFox, tempIMG);
             pile.add(x);
         }//end while
 
