@@ -18,6 +18,67 @@ public class GameBoard {
         return board;
     }
 
+    public int getHeight() {
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        for (int r=0; r<42; r++) {
+            for (int c=0; c<42; c++) {
+                if (!board[r][c].getEmpty()) {
+                    list.add(r);
+                }
+            }
+        }
+        int diff = 0;
+        if (!list.isEmpty()) {
+            diff = list.get(list.size()) - list.get(0);
+        }
+        return diff+1;
+    }
+    public int getLength() {
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        for (int c=0; c<42; c++) {
+            for (int r=0; r<42; r++) {
+                if (!board[r][c].getEmpty()) {
+                    list.add(c);
+                }
+            }
+        }
+        int diff = 0;
+        if (!list.isEmpty()) {
+            diff = list.get(list.size()) - list.get(0);
+        }
+        return diff+1;
+    }
+
+    // returns -1 if board is empty
+    public int getStartingX() {
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        for (int c=0; c<42; c++) {
+            for (int r=0; r<42; r++) {
+                if (!board[r][c].getEmpty()) {
+                    list.add(c);
+                }
+            }
+        }
+        if (!list.isEmpty())
+            return list.get(0);
+        return -1;
+    }
+
+    // returns -1 if board is empty
+    public int getStartingY() {
+        ArrayList<Integer> list = new ArrayList<Integer>();
+        for (int r=0; r<42; r++) {
+            for (int c=0; c<42; c++) {
+                if (!board[r][c].getEmpty()) {
+                    list.add(r);
+                }
+            }
+        }
+        if (!list.isEmpty())
+            return list.get(0);
+        return -1;
+    }
+
     public void addStarterTile(StarterTile st) {
         ArrayList<HabitatTile> stSections = st.getListOfTiles();
         placeTile(20, 21, stSections.get(0));
