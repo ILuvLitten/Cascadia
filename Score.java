@@ -7,7 +7,6 @@ public class Score {
     private int foxScore;
     private int hawkScore;
     private int elkScore;
-    private int totalScore;
     private int mountainScore;
     private int riverScore;
     private int prairieScore;
@@ -23,7 +22,6 @@ public class Score {
         foxScore = 0;
         hawkScore = 0;
         elkScore = 0;
-        totalScore = 0;
         mountainScore = 0;
         riverScore = 0;
         prairieScore = 0;
@@ -178,9 +176,6 @@ public class Score {
     public void calcElkScore(){
         elkScore = b.calculateElk();
     }
-    public void calcTotalScore(){
-        totalScore = bearScore + salmonScore + foxScore + hawkScore + elkScore + mountainScore + riverScore + prairieScore + forestScore + wetlandScore + natureTokens;
-    }
     public void calcMountainScore(){
         mountainScore = b.calculateMountain();
     }
@@ -200,41 +195,48 @@ public class Score {
         natureTokens = b.getNatureTokens();
     }
     public int getBearScore() {
+        calcBearScore();
         return bearScore;
     }
     public int getSalmonScore() {
+        calcSalmonScore();
         return salmonScore;
     }
     public int getFoxScore() {
+        calcFoxScore();
         return foxScore;
     }
     public int getHawkScore() {
+        calcHawkScore();
         return hawkScore;
     }
     public int getElkScore() {
+        calcElkScore();
         return elkScore;
     }
-    public int getTotalScore() {
-        return totalScore;
-    }
     public int getMountainScore() {
+        calcMountainScore();
         return mountainScore;
     }
     public int getRiverScore() {
+        calcRiverScore();
         return riverScore;
     }
     public int getPrairieScore() {
+        calcPrairieScore();
         return prairieScore;
     }
     public int getForestScore() {
+        calcForestScore();
         return forestScore;
     }
     public int getWetlandScore() {
+        calcWetlandScore();
         return wetlandScore;
     }
     public int getNatureTokens() {
+        calcNatureTokens();
         return natureTokens;
     }
 
 }
-
