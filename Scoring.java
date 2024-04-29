@@ -608,4 +608,50 @@ public class Scoring {
     public boolean getThreeWayTie() {
         return threeWayTie;
     }
+
+    public int getMountainExtra1() {
+        return mountainExtra1;
+    }
+    public int getMountainExtra2() {
+        return mountainExtra2;
+    }
+    public int getMountainExtra3() {
+        return mountainExtra3;
+    }
+    public int getForestExtra1() {
+        return forestExtra1;
+    }
+    public int getForestExtra2() {
+        return forestExtra2;
+    }
+    public int getForestExtra3() {
+        return forestExtra3;
+    }
+    public int getPrairieExtra1() {
+        return prairieExtra1;
+    }
+    public int getPrairieExtra2() {
+        return prairieExtra2;
+    }
+    public int getPrairieExtra3() {
+        return prairieExtra3;
+    }
+    public int getWetlandExtra1() {
+        return wetlandExtra1;
+    }
+    public int getWetlandExtra2() {
+        return wetlandExtra2;
+    }
+    public int getWetlandExtra3() {
+        return wetlandExtra3;
+    }
+    public int getRiverExtra1() {
+        return riverExtra1;
+    }
+    public int getRiverExtra2() {
+        return riverExtra2;
+    }
+    public int getRiverExtra3() {
+        return riverExtra3;
+    }
 }
