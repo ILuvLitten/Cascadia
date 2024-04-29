@@ -80,10 +80,9 @@ public class GameBoard {
     }
 
     public void addStarterTile(StarterTile st) {
-        ArrayList<HabitatTile> stSections = st.getListOfTiles();
-        placeTile(20, 21, stSections.get(0));
-        placeTile(21, 20, stSections.get(1));
-        placeTile(21, 21, stSections.get(2));
+        placeTile(20, 21, st.getTop());
+        placeTile(21, 20, st.getLeft());
+        placeTile(21, 21, st.getRight());
     }
 
 
