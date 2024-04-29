@@ -3,8 +3,8 @@ import static java.lang.System.*;
 import java.util.TreeSet;
 
 public class Scoring {
-    Player player1, player2, player3;
-    GameBoard board1, board2, board3;
+    private Player player1, player2, player3;
+    private GameBoard board1, board2, board3;
     private int bearScore1, bearScore2, bearScore3;
     private int salmonScore1, salmonScore2, salmonScore3;
     private int foxScore1, foxScore2, foxScore3;
