@@ -593,7 +593,7 @@ public class Scoring {
                 }
             }
         }
-
+    }
     // returns true if there is a tie between first and second
     public boolean getFirstSecondTie() {
         return firstSecondTie;
