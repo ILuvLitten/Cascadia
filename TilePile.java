@@ -10,11 +10,19 @@ import java.util.Scanner;
 
 public class TilePile {
     private ArrayList<HabitatTile> pile;
+    private ArrayList<StarterTile> stPile;
     Scanner kb = new Scanner(new File("Text File for Images Cascadia.txt"));
 
 
     public TilePile() throws IOException {
         pile = new ArrayList<HabitatTile>();
+        stPile = new ArrayList<StarterTile>();
+        // add image in last parameter
+        HabitatTile top1 = new HabitatTile(true, 2, 2, false, true, false, false, false);
+        HabitatTile left1 = new HabitatTile(false, 1, 5, true, true, false, true, false);
+        HabitatTile right1 = new HabitatTile(false, 3, 4, false, false, false, true, true);
+        HabitatTile top2 = new HabitatTile(true, 3, 3, false, false, false, false, true);
+        HabitatTile left2 = new HabitatTile(false, 4, 5, false, false, true, true, true);
         HabitatTile x;
         int numSet2 =0;
         int numSet1 =0;
@@ -156,6 +164,9 @@ public class TilePile {
     }
     public ArrayList<HabitatTile> getPile() {
         return pile;
+    }
+    public ArrayList<StarterTile> getStarterTilePile() {
+        return stPile;
     }
 
 
