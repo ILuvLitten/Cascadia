@@ -1,3 +1,4 @@
+import java.awt.*;
 import java.util.ArrayList;
 import static java.lang.System.*;
 
@@ -237,6 +238,11 @@ public class Score {
     public int getNatureTokens() {
         calcNatureTokens();
         return natureTokens;
+    }
+
+    public void paint (Graphics g, int x, int y, int width, int height) {
+        g.drawImage(this.image, x, y, width, height, null);
+        //need to add the rotate and stuff so might need to change this one
     }
 
 }
