@@ -18,11 +18,39 @@ public class TilePile {
         pile = new ArrayList<HabitatTile>();
         stPile = new ArrayList<StarterTile>();
         // add image in last parameter
-        HabitatTile top1 = new HabitatTile(true, 2, 2, false, true, false, false, false);
-        HabitatTile left1 = new HabitatTile(false, 1, 5, true, true, false, true, false);
-        HabitatTile right1 = new HabitatTile(false, 3, 4, false, false, false, true, true);
-        HabitatTile top2 = new HabitatTile(true, 3, 3, false, false, false, false, true);
-        HabitatTile left2 = new HabitatTile(false, 4, 5, false, false, true, true, true);
+        HabitatTile top1 = new HabitatTile(true, 2, 2, false, true, false, false, false, IMAGE);
+        HabitatTile left1 = new HabitatTile(false, 1, 5, true, true, false, true, false, IMAGE);
+        HabitatTile right1 = new HabitatTile(false, 3, 4, false, false, true, false, true, IMAGE);
+        StarterTile starter1 = new StarterTile(top1, left1, right1);
+        stPile.add(starter1);
+
+        HabitatTile top2 = new HabitatTile(true, 3, 3, false, false, false, false, true, IMAGE);
+        HabitatTile left2 = new HabitatTile(false, 4, 5, false, false, true, true, true, IMAGE);
+        HabitatTile right2 = new HabitatTile(false, 1, 2, true, true, false, false, false. IMAGE);
+        StarterTile starter2 = new StarterTile(top2, left2, right2);
+        stPile.add(starter2);
+
+        HabitatTile top3 = new HabitatTile(true, 4, 4, false, false, false, true, false, IMAGE);
+        HabitatTile left3 = new HabitatTile(false, 5, 2, false, true, true, true, false, IMAGE);
+        HabitatTile right3 = new HabitatTile(false, 1, 3, true, false, false, false, true, IMAGE);
+        StarterTile starter3 = new StarterTile(top3, left3, right3);
+        stPile.add(starter3);
+
+        HabitatTile top4 = new HabitatTile(true, 1, 1, true, false, false, false, false, IMAGE);
+        HabitatTile left4 = new HabitatTile(false, 2, 4, false, true, false, true, true, IMAGE);
+        HabitatTile right4 = new HabitatTile(false, 3, 5, true, false, true, false, false, IMAGE);
+        StarterTile starter4 = new StarterTile(top4, left4, right4);
+        stPile.add(starter4);
+
+        HabitatTile top5 = new HabitatTile(true, 5, 5, false, false, true, false, false, IMAGE);
+        HabitatTile left5 = new HabitatTile(false, 3, 2, true, true, true, false, false, IMAGE);
+        HabitatTile right5 = new HabitatTile(false, 4, 1, false, false, false, true, true, IMAGE);
+        StarterTile starter5 = new StarterTile(top5, left5, right5);
+        stPile.add(starter5);
+
+
+
+
         HabitatTile x;
         int numSet2 =0;
         int numSet1 =0;
@@ -81,15 +109,15 @@ public class TilePile {
 
 
             if (numSet2 == 10000) {
-                terr1 = 1;
+                terr1 = 1;  //mount
             } else if (numSet2 == 01000) {
-                terr1 = 2;
+                terr1 = 2;  //forest
             } else if (numSet2 == 00100) {
-                terr1 = 3;
+                terr1 = 3;    //praire
             } else if (numSet2 == 00010) {
-                terr1 = 4;
+                terr1 = 4;     //wetland
             } else if (numSet2 == 00001) {
-                terr1 = 5;
+                terr1 = 5;      //river
             }
 
 

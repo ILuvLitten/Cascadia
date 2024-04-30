@@ -65,7 +65,7 @@ public class HabitatTile {
         riverChecked = false;
     }
 
-    public HabitatTile(int terrain1, int terrain2, boolean canHoldBear, boolean canHoldElk, boolean canHoldSalmon, boolean canHoldHawk, boolean canHoldFox, boolean isKeystone) throws FileNotFoundException {
+    /*public HabitatTile(int terrain1, int terrain2, boolean canHoldBear, boolean canHoldElk, boolean canHoldSalmon, boolean canHoldHawk, boolean canHoldFox, boolean isKeystone) throws FileNotFoundException {
         this.terrain1 = terrain2;
         this.terrain2 = terrain2;
         this.terrain3 = terrain2;
@@ -88,7 +88,7 @@ public class HabitatTile {
         prairieChecked = false;
         wetlandChecked = false;
         riverChecked = false;
-    }
+    }*/
 
     public int getTotalTerrain1() {
         return totalTerrain1;
