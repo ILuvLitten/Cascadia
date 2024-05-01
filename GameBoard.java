@@ -833,7 +833,8 @@ public class GameBoard {
     public int getNatureTokens() {
         return natureTokens;
     }
-    
+
+
 
 }
 

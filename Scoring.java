@@ -654,4 +654,5 @@ public class Scoring {
     public int getRiverExtra3() {
         return riverExtra3;
     }
+
 }

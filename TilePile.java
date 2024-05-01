@@ -36,7 +36,7 @@ public class TilePile {
         String temp3;
         String temp4;
         String temp5;
-        BufferedImage tempIMG;
+        BufferedImage tempIMG = null;
         int terr1=0;
         int terr2 =0;
 
@@ -45,7 +45,12 @@ public class TilePile {
 
             String[] arr = line.split("-");
 
-            tempIMG = ImageIO.read(TilePile.class.getResource("/images/" + line + ".png"));
+           
+            try {
+                tempIMG = ImageIO.read(TilePile.class.getResource("/images/" + line + ".png"));
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
             numSet1 = Integer.parseInt(arr[0]);
             numSet2 = Integer.parseInt(arr[1]);
             numSet3 = Integer.parseInt(arr[2]);

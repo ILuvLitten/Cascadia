@@ -61,7 +61,7 @@ public class ScoreRules {
         return currImg;
     }
 
-    public BufferedImage getCurrImgHalf
+    public BufferedImage getCurrImgHalf()
     {
         return currImgHalf;
     }
