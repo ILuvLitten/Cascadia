@@ -1,7 +1,6 @@
 import javax.imageio.ImageIO;
 import java.awt.image.BufferedImage;
 import java.io.File;
-import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Collections;
@@ -12,25 +11,25 @@ public class TilePile {
     private ArrayList<HabitatTile> pile;
     private ArrayList<StarterTile> stPile;
     Scanner kb = new Scanner(new File("Text File for Images Cascadia.txt"));
-    BufferedImage topImg1 = ImageIO.read(TilePile.class.getResource("/images/1-01000-01000-01000.png"));
-    BufferedImage leftImg1 = ImageIO.read(TilePile.class.getResource("/images/0-10000-00001-11010.png"));
-    BufferedImage rightImg1 = ImageIO.read(TilePile.class.getResource("/images/0-00100-00010-00101.png"));
+    BufferedImage topImg1 = ImageIO.read(TilePile.class.getResource("/StarterImages/1-01000-01000-01000.png"));
+    BufferedImage leftImg1 = ImageIO.read(TilePile.class.getResource("/Starterimages/0-10000-00001-11010.png"));
+    BufferedImage rightImg1 = ImageIO.read(TilePile.class.getResource("/Starterimages/0-00100-00010-00101.png"));
 
-    BufferedImage topImg2 = ImageIO.read(TilePile.class.getResource("/images/1-00100-00100-00001.png"));
-    BufferedImage leftImg2 = ImageIO.read(TilePile.class.getResource("/images/0-00010-10000-00111.png"));
-    BufferedImage rightImg2 = ImageIO.read(TilePile.class.getResource("/images/0-10000-01000-11000.png"));
+    BufferedImage topImg2 = ImageIO.read(TilePile.class.getResource("/Starterimages/1-00100-00100-00001.png"));
+    BufferedImage leftImg2 = ImageIO.read(TilePile.class.getResource("/Starterimages/0-00010-10000-00111.png"));
+    BufferedImage rightImg2 = ImageIO.read(TilePile.class.getResource("/Starterimages/0-10000-01000-11000.png"));
 
-    BufferedImage topImg3 = ImageIO.read(TilePile.class.getResource("/images/1-00010-00010-00010.png"));
-    BufferedImage leftImg3 = ImageIO.read(TilePile.class.getResource("/images/0-00001-01000-01110.png"));
-    BufferedImage rightImg3 = ImageIO.read(TilePile.class.getResource("/images/0-10000-00100-10001.png"));
+    BufferedImage topImg3 = ImageIO.read(TilePile.class.getResource("/StarterImages/1-00010-00010-00010.png"));
+    BufferedImage leftImg3 = ImageIO.read(TilePile.class.getResource("/StarterImages/0-00001-01000-01110.png"));
+    BufferedImage rightImg3 = ImageIO.read(TilePile.class.getResource("/StarterImages/0-10000-00100-10001.png"));
 
-    BufferedImage topImg4 = ImageIO.read(TilePile.class.getResource("/images/1-10000-10000-10000.png"));
-    BufferedImage leftImg4 = ImageIO.read(TilePile.class.getResource("/images/0-01000-00010-01011.png"));
-    BufferedImage rightImg4 = ImageIO.read(TilePile.class.getResource("/images/0-00100-00001-10100.png"));
+    BufferedImage topImg4 = ImageIO.read(TilePile.class.getResource("/Starterimages/1-10000-10000-10000.png"));
+    BufferedImage leftImg4 = ImageIO.read(TilePile.class.getResource("/StarterImages/0-01000-00010-01011.png"));
+    BufferedImage rightImg4 = ImageIO.read(TilePile.class.getResource("/Starterimages/0-00100-00001-10100.png"));
 
-    BufferedImage topImg5 = ImageIO.read(TilePile.class.getResource("/images/1-00001-00001-00100.png"));
-    BufferedImage leftImg5 = ImageIO.read(TilePile.class.getResource("/images/0-00100-01000-11100.png"));
-    BufferedImage rightImg5 = ImageIO.read(TilePile.class.getResource("/images/0-00010-10000-00011.png"));
+    BufferedImage topImg5 = ImageIO.read(TilePile.class.getResource("/StarterImages/1-00001-00001-00100.png"));
+    BufferedImage leftImg5 = ImageIO.read(TilePile.class.getResource("/Starterimages/0-00100-01000-11100.png"));
+    BufferedImage rightImg5 = ImageIO.read(TilePile.class.getResource("/StarterImages/0-00010-10000-00011.png"));
 
     public TilePile() throws IOException {
         pile = new ArrayList<HabitatTile>();
