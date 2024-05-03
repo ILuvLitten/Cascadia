@@ -14,7 +14,7 @@ public class Player {
     }
 
     public int getNatureTokens() {
-        return board.getNatureTokens();
+        return natureTokens;
     }
   
     public Score getScoreCard() {
