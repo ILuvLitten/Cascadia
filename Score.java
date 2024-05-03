@@ -195,48 +195,53 @@ public class Score {
     public void calcNatureTokens() {
         natureTokens = b.getNatureTokens();
     }
-    public int getBearScore() {
+    
+     // ONLY CALL THIS METHOD ONCE; IF YOU CALL IT MORE THAN ONCE ALL THE VALUES WILL BE SET TO 0
+    public void calculateAll() {
         calcBearScore();
+        calcElkScore();
+        calcSalmonScore();
+        calcHawkScore();
+        calcFoxScore();
+        calcMountainScore();
+        calcForestScore();
+        calcPrairieScore();
+        calcWetlandScore();
+        calcRiverScore();
+        calcNatureTokens();
+    }
+    
+    public int getBearScore() {
         return bearScore;
     }
     public int getSalmonScore() {
-        calcSalmonScore();
         return salmonScore;
     }
     public int getFoxScore() {
-        calcFoxScore();
         return foxScore;
     }
     public int getHawkScore() {
-        calcHawkScore();
         return hawkScore;
     }
     public int getElkScore() {
-        calcElkScore();
         return elkScore;
     }
     public int getMountainScore() {
-        calcMountainScore();
         return mountainScore;
     }
     public int getRiverScore() {
-        calcRiverScore();
         return riverScore;
     }
     public int getPrairieScore() {
-        calcPrairieScore();
         return prairieScore;
     }
     public int getForestScore() {
-        calcForestScore();
         return forestScore;
     }
     public int getWetlandScore() {
-        calcWetlandScore();
         return wetlandScore;
     }
     public int getNatureTokens() {
-        calcNatureTokens();
         return natureTokens;
     }
 
