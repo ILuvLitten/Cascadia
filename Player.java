@@ -18,5 +18,9 @@ public class Player {
     public Score getScoreCard() {
         return scoreCard;
     }
+
+    public void setNatureTokens(int n) {
+        natureTokens = n;
+    }
     
 }
