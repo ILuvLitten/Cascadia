@@ -65,9 +65,9 @@ public class Scoring {
         riverScore1 = one.getScoreCard().getRiverScore();
         riverScore2 = two.getScoreCard().getRiverScore();
         riverScore3 = three.getScoreCard().getRiverScore();
-        natureTokens1 = one.getScoreCard().getNatureTokens();
-        natureTokens2 = two.getScoreCard().getNatureTokens();
-        natureTokens3 = three.getScoreCard().getNatureTokens();
+        natureTokens1 = one.getNatureTokens();
+        natureTokens2 = two.getNatureTokens();
+        natureTokens3 = three.getNatureTokens();
         mountainExtra1 = 0;
         mountainExtra2 = 0;
         mountainExtra3 = 0;
