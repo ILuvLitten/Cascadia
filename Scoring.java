@@ -32,6 +32,9 @@ public class Scoring {
         board1 = one.getBoard();
         board2 = two.getBoard();
         board3 = three.getBoard();
+	one.getScoreCard().calculateAll();
+        two.getScoreCard().calculateAll();
+        three.getScoreCard().calculateAll();
         bearScore1 = one.getScoreCard().getBearScore();
         bearScore2 = two.getScoreCard().getBearScore();
         bearScore3 = three.getScoreCard().getBearScore();
