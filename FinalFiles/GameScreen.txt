@@ -750,7 +750,7 @@ public class GameScreen {
                                 if(discardButton.mouseClicked(clickX,clickY) > 0){
 
 
-                                        tokenBag.addToken(chosenToken);
+                                        tokenBag.addTokens(chosenToken);
   chosenToken = null;
 gamestate = 6;
 
