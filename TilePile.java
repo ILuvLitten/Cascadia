@@ -10,26 +10,105 @@ import java.util.Scanner;
 public class TilePile {
     private ArrayList<HabitatTile> pile;
     private ArrayList<StarterTile> stPile;
+    private BufferedImage topImg1;
+    private BufferedImage leftImg1;
+    private BufferedImage rightImg1;
+
+    private BufferedImage topImg2;
+    private BufferedImage leftImg2;
+    private BufferedImage rightImg2;
+
+    private BufferedImage topImg3;
+    private BufferedImage leftImg3;
+    private BufferedImage rightImg3;
+
+    private BufferedImage topImg4;
+    private BufferedImage leftImg4;
+    private BufferedImage rightImg4;
+
+    private BufferedImage topImg5;
+    private BufferedImage leftImg5;
+    private BufferedImage rightImg5;
     Scanner kb = new Scanner(new File("Text File for Images Cascadia.txt"));
-    BufferedImage topImg1 = ImageIO.read(TilePile.class.getResource("/StarterImages/1-01000-01000-01000.png"));
-    BufferedImage leftImg1 = ImageIO.read(TilePile.class.getResource("/Starterimages/0-10000-00001-11010.png"));
-    BufferedImage rightImg1 = ImageIO.read(TilePile.class.getResource("/Starterimages/0-00100-00010-00101.png"));
+    try{
+    topImg1 = ImageIO.read(TilePile.class.getResource("/StarterImages/1-01000-01000-01000.png"));
+}catch(Exception E){
+    topImg1 = null;
+}
+try{
+    leftImg1 = ImageIO.read(TilePile.class.getResource("/Starterimages/0-10000-00001-11010.png"));
+    }catch(Exception E){
+    topImg1 = null;
+}
+try{
+    rightImg1 = ImageIO.read(TilePile.class.getResource("/Starterimages/0-00100-00010-00101.png"));
+    }catch(Exception E){
+    topImg1 = null;
+}
 
-    BufferedImage topImg2 = ImageIO.read(TilePile.class.getResource("/Starterimages/1-00100-00100-00001.png"));
-    BufferedImage leftImg2 = ImageIO.read(TilePile.class.getResource("/Starterimages/0-00010-10000-00111.png"));
-    BufferedImage rightImg2 = ImageIO.read(TilePile.class.getResource("/Starterimages/0-10000-01000-11000.png"));
+try{
+    topImg2 = ImageIO.read(TilePile.class.getResource("/Starterimages/1-00100-00100-00001.png"));
+    }catch(Exception E){
+    topImg1 = null;
+}
+try{
+    leftImg2 = ImageIO.read(TilePile.class.getResource("/Starterimages/0-00010-10000-00111.png"));
+    }catch(Exception E){
+    topImg1 = null;
+}
+try{
+    rightImg2 = ImageIO.read(TilePile.class.getResource("/Starterimages/0-10000-01000-11000.png"));
+    }catch(Exception E){
+    topImg1 = null;
+}
 
-    BufferedImage topImg3 = ImageIO.read(TilePile.class.getResource("/StarterImages/1-00010-00010-00010.png"));
-    BufferedImage leftImg3 = ImageIO.read(TilePile.class.getResource("/StarterImages/0-00001-01000-01110.png"));
-    BufferedImage rightImg3 = ImageIO.read(TilePile.class.getResource("/StarterImages/0-10000-00100-10001.png"));
+try{
+    topImg3 = ImageIO.read(TilePile.class.getResource("/StarterImages/1-00010-00010-00010.png"));
+    }catch(Exception E){
+    topImg1 = null;
+}
+try{
+    leftImg3 = ImageIO.read(TilePile.class.getResource("/StarterImages/0-00001-01000-01110.png"));
+    }catch(Exception E){
+    topImg1 = null;
+}
+try{
+    rightImg3 = ImageIO.read(TilePile.class.getResource("/StarterImages/0-10000-00100-10001.png"));
+    }catch(Exception E){
+    topImg1 = null;
+}
 
-    BufferedImage topImg4 = ImageIO.read(TilePile.class.getResource("/Starterimages/1-10000-10000-10000.png"));
-    BufferedImage leftImg4 = ImageIO.read(TilePile.class.getResource("/StarterImages/0-01000-00010-01011.png"));
-    BufferedImage rightImg4 = ImageIO.read(TilePile.class.getResource("/Starterimages/0-00100-00001-10100.png"));
+try{
+    topImg4 = ImageIO.read(TilePile.class.getResource("/Starterimages/1-10000-10000-10000.png"));
+    }catch(Exception E){
+    topImg1 = null;
+}
+try{
+    leftImg4 = ImageIO.read(TilePile.class.getResource("/StarterImages/0-01000-00010-01011.png"));
+    }catch(Exception E){
+    topImg1 = null;
+}
+try{
+    rightImg4 = ImageIO.read(TilePile.class.getResource("/Starterimages/0-00100-00001-10100.png"));
+    }catch(Exception E){
+    topImg1 = null;
+}
 
-    BufferedImage topImg5 = ImageIO.read(TilePile.class.getResource("/StarterImages/1-00001-00001-00100.png"));
-    BufferedImage leftImg5 = ImageIO.read(TilePile.class.getResource("/Starterimages/0-00100-01000-11100.png"));
-    BufferedImage rightImg5 = ImageIO.read(TilePile.class.getResource("/StarterImages/0-00010-10000-00011.png"));
+try{
+    topImg5 = ImageIO.read(TilePile.class.getResource("/StarterImages/1-00001-00001-00100.png"));
+    }catch(Exception E){
+    topImg1 = null;
+}
+try{
+    leftImg5 = ImageIO.read(TilePile.class.getResource("/Starterimages/0-00100-01000-11100.png"));
+    }catch(Exception E){
+    topImg1 = null;
+}
+try{
+    rightImg5 = ImageIO.read(TilePile.class.getResource("/StarterImages/0-00010-10000-00011.png"));
+    }catch(Exception E){
+    topImg1 = null;
+}
 
     public TilePile() throws IOException {
         pile = new ArrayList<HabitatTile>();
