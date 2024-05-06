@@ -281,8 +281,13 @@ try{
         return pile.remove(0);
     }
 
+    public StarterTile drawStarter(){
+        return stPile.remove(0);
+    }
+
     public void shuffle() {
         Collections.shuffle(pile);
+        Collections.shuffle(stPile);
     }
 
     public int size() {
