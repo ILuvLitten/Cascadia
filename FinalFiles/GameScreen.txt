@@ -745,14 +745,29 @@ public class GameScreen {
                                 break;
                         case 5:
                                 //tokenBag.addTokens(tokens[]);
-                                shuffleSelectedTokens(false);
                                 
-                                pickTokens[selectedTile].setSelected(false);
-                                chosenToken = null;
-                                gamestate = 6;
+                                
+                                if(discardButton.mouseClicked(clickX,clickY) > 0){
+
+
+                                        tokenBag.addToken(chosenToken);
+  chosenToken = null;
+gamestate = 6;
+
+
+                                        }
+                                        if(currentPlayer.getBoard().addTokenToClicked(chosenToken,clickX,clickY)){
+
+
+                                        
+
+  chosenToken = null;
+gamestate = 6;
+}
                                 break;
                         case 6:
                                 selectedTile = -1;
+selectedToken = -1;
                                 updateSelected();
                                 boolean newRound = nextPlayer();
                                 if(newRound) {
