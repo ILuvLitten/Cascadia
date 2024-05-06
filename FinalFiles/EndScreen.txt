@@ -97,25 +97,32 @@ public class EndScreen{
                 newGameButton.paint(g);
                 mainMenuButton.paint(g);
                 
-                g.drawImage(scoreCardImage, 0,0,100,100,null);
-                g.drawImage(placeImgs[players[0].getPlace(players)],0,0,100,100,null);
+                g.drawImage(scoreCardImage, 200,300,100,400,null);
+                g.drawImage(placeImgs[players[0].getPlace(players)],200,100,100,200,null);
+
+players[0].getBoard().setDisplay(200,800,100);
+players[0].getBoard().paint(g);
+
+
+                g.drawImage(scoreCardImage, 400,300,100,400,null);
+                g.drawImage(placeImgs[players[1].getPlace(players)],400,100,100,200,null);
+
+players[1].getBoard().setDisplay(400,800,100);
+players[1].getBoard().paint(g);
 
 
 
 
-                g.drawImage(scoreCardImage, 0,0,100,100,null);
-                g.drawImage(placeImgs[players[1].getPlace(players)],0,0,100,100,null);
+                g.drawImage(scoreCardImage, 600,300,100,400,null);
+                g.drawImage(placeImgs[players[2].getPlace(players)],600,100,100,200,null);
+
+players[2].getBoard().setDisplay(600,800,100);
+players[2].getBoard().paint(g);
 
 
 
 
-                g.drawImage(scoreCardImage, 0,0,100,100,null);
-                g.drawImage(placeImgs[players[2].getPlace(players)],0,0,100,100,null);
-
-
-
-
-                scoreHandler.paint(g,0,0,0,0,0,0,0,0,0);
+                scoreHandler.paint(g,200,300,400,300,600,300,10,10,10);
                 
                 
 
