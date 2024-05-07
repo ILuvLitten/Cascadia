@@ -16,10 +16,13 @@ private int lastMouseY = -1;
 private boolean enableState = -1;
 /*
 -1 All Disabled
-0 All Enabled
+0 Open Tiles Enabled
 1 Can Hold Bear Enable
-2
-
+2 Can Hold Elk Enable
+3 Can Hold Salmon Enable
+4 Can Hold Hawk Enable
+5 Can Hold Fox Enable
+6 All Enabled
 */
 
 
@@ -957,6 +960,15 @@ private boolean enableState = -1;
 
 
             }
+mouseMoved(lastMouseX,lastMouseY);
+
+if(enableState < 0){
+disableAllButtons()
+}else if(enableState < 1){
+enableOpenTileButtons();
+}else if(enableState < 6){
+enableOpenTokenButtons(enableState);
+}
             
     }
     
@@ -969,17 +981,20 @@ private boolean enableState = -1;
     
     
     public void disableAllButtons() {
-            updateButtonGrid();
-            for(Button[] row:buttonGrid) {
+            
+            enableState = -1;
+for(Button[] row:buttonGrid) {
                     for(Button b:row) {
                             b.setDisabled(true);
                     }
             }
+
     }
     
     public void enableOpenTileButtons() {
             
             disableAllButtons();
+enableState = 0;
             
             for(int r = 0, y = getStartingY()-1; r < buttonGrid.length; r++, y++){
                 for(int c = 0, x = getStartingX()-1; c < buttonGrid[r].length; c++, x++){
@@ -1012,7 +1027,9 @@ private boolean enableState = -1;
          * 5: fox
          
          */
+if(token==null){return;}
             disableAllButtons();
+enableState = token.getAnimalType();
             for(int r = 0, y = getStartingY()-1; r < buttonGrid.length; r++, y++){
                 for(int c = 0, x = getStartingX()-1; c < buttonGrid[r].length; c++, x++){
 
@@ -1023,6 +1040,52 @@ private boolean enableState = -1;
                 
                 if(tile!=null&&tile.getToken()==null) {
                         switch(token.getAnimalType()) {
+                        case 1:
+                                if(tile.getCanHoldBear()) {buttonGrid[r][c].setDisabled(false);}
+                        case 2:
+                                if(tile.getCanHoldElk()) {buttonGrid[r][c].setDisabled(false);}
+                        case 3:
+                                if(tile.getCanHoldSalmon()) {buttonGrid[r][c].setDisabled(false);}
+                        case 4:
+                                if(tile.getCanHoldHawk()) {buttonGrid[r][c].setDisabled(false);}
+                        case 5:
+                                if(tile.getCanHoldFox()) {buttonGrid[r][c].setDisabled(false);}
+                                
+                        }
+                }
+
+
+                }
+
+
+                }
+                }
+            
+    }
+
+enableOpenTokenButtons(int animalType) {
+            
+            /*
+         * 1: bear
+         * 2: elk
+         * 3: salmon
+         * 4: hawks
+         * 5: fox
+         
+         */
+if(token==null){return;}
+            disableAllButtons();
+enableState = animalType;
+            for(int r = 0, y = getStartingY()-1; r < buttonGrid.length; r++, y++){
+                for(int c = 0, x = getStartingX()-1; c < buttonGrid[r].length; c++, x++){
+
+
+                if(x > -1 && x < board[0].length && y > -1 && y < board.length){
+                        
+                        HabitatTile tile = board[y][x].getTile();
+                
+                if(tile!=null&&tile.getToken()==null) {
+                        switch(animalType) {
                         case 1:
                                 if(tile.getCanHoldBear()) {buttonGrid[r][c].setDisabled(false);}
                         case 2:
@@ -1138,6 +1201,8 @@ private boolean enableState = -1;
 
 
                     }
+lastMouseX = clickX;
+lastMouseY = clickY;
             }
 
 
