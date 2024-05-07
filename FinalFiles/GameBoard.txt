@@ -11,6 +11,18 @@ public class GameBoard {
     private int size;
     private int natureTokens;
 
+private int lastMouseX = -1;
+private int lastMouseY = -1;
+private boolean enableState = -1;
+/*
+-1 All Disabled
+0 All Enabled
+1 Can Hold Bear Enable
+2
+
+*/
+
+
 
     public GameBoard(int x,int y,int s) {
         board = new Hex[42][42];
