@@ -363,7 +363,11 @@ try {
 }catch(Exception E) {
         System.out.println("Starter 5 not loaded");
 }
-        
+
+shuffle();
+while(size()>63){
+draw();
+}
 
 
 
