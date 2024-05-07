@@ -103,7 +103,7 @@ public class GameScreen {
 
 
     private int round = 1;
-    private int totalRounds = 1;
+    private int totalRounds = 20;
 
     private int gamestate = 0;
     /*-1 Testing
@@ -168,7 +168,7 @@ public class GameScreen {
 
 
         try {
-            bg = ImageIO.read(StartScreen.class.getResource("/FinalFiles/guiImages/GameScreenFinalBG.png"));
+            bg = ImageIO.read(StartScreen.class.getResource("/guiImages/GameScreenFinalBG.png"));
         }
         catch(Exception E) {
             bg = null;
@@ -176,7 +176,7 @@ public class GameScreen {
         }
 
         try {
-            confirmQuitbg = ImageIO.read(StartScreen.class.getResource("/FinalFiles/guiImages/GameScreenFinalConfirmBG.png"));
+            confirmQuitbg = ImageIO.read(StartScreen.class.getResource("/guiImages/GameScreenFinalConfirmBG.png"));
         }
         catch(Exception E) {
             bg = null;
@@ -745,14 +745,29 @@ public class GameScreen {
                     break;
                 case 5:
                     //tokenBag.addTokens(tokens[]);
-                    shuffleSelectedTokens(false);
 
-                    pickTokens[selectedTile].setSelected(false);
-                    chosenToken = null;
-                    gamestate = 6;
+
+                    if(discardButton.mouseClicked(clickX,clickY) > 0){
+
+
+                        tokenBag.addTokens(chosenToken);
+                        chosenToken = null;
+                        gamestate = 6;
+
+
+                    }
+                    if(currentPlayer.getBoard().addTokenToClicked(chosenToken,clickX,clickY)){
+
+
+
+
+                        chosenToken = null;
+                        gamestate = 6;
+                    }
                     break;
                 case 6:
                     selectedTile = -1;
+                    selectedToken = -1;
                     updateSelected();
                     boolean newRound = nextPlayer();
                     if(newRound) {

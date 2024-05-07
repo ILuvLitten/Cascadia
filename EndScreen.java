@@ -50,7 +50,7 @@ public class EndScreen{
 
 
         try {
-            bg = ImageIO.read(EndScreen.class.getResource("/FinalFiles/guiImages/EndScreenBG.png"));
+            bg = ImageIO.read(EndScreen.class.getResource("/guiImages/EndScreenBG.png"));
         }
         catch(Exception E) {
             bg = null;
@@ -58,7 +58,7 @@ public class EndScreen{
         }
 
         try {
-            scoreCardImage = ImageIO.read(EndScreen.class.getResource("/FinalFiles/guiImages/PlayerScoreCardFinalIMG.png"));
+            scoreCardImage = ImageIO.read(EndScreen.class.getResource("/guiImages/PlayerScoreCardFinalIMG.png"));
         }
         catch(Exception E) {
             scoreCardImage = null;
@@ -67,19 +67,19 @@ public class EndScreen{
 
         placeImgs = new BufferedImage[3];
         try {
-            placeImgs[0] = ImageIO.read(EndScreen.class.getResource("/FinalFiles/guiImages/FirstIMG.png"));
+            placeImgs[0] = ImageIO.read(EndScreen.class.getResource("/guiImages/FirstIMG.png"));
         }
         catch(Exception E) {
             System.out.println("TITLESCREEN: IMAGE NOT FOUND");
         }
         try {
-            placeImgs[1] = ImageIO.read(EndScreen.class.getResource("/FinalFiles/guiImages/SecondIMG.png"));
+            placeImgs[1] = ImageIO.read(EndScreen.class.getResource("/guiImages/SecondIMG.png"));
         }
         catch(Exception E) {
             System.out.println("TITLESCREEN: IMAGE NOT FOUND");
         }
         try {
-            placeImgs[2] = ImageIO.read(EndScreen.class.getResource("/FinalFiles/guiImages/ThirdIMG.png"));
+            placeImgs[2] = ImageIO.read(EndScreen.class.getResource("/guiImages/ThirdIMG.png"));
         }
         catch(Exception E) {
             System.out.println("TITLESCREEN: IMAGE NOT FOUND");
@@ -97,25 +97,32 @@ public class EndScreen{
         newGameButton.paint(g);
         mainMenuButton.paint(g);
 
-        g.drawImage(scoreCardImage, 0,0,100,100,null);
-        g.drawImage(placeImgs[players[0].getPlace(players)],0,0,100,100,null);
+        g.drawImage(scoreCardImage, 200,300,100,400,null);
+        g.drawImage(placeImgs[players[0].getPlace(players)],200,100,100,200,null);
+
+        players[0].getBoard().setDisplay(200,800,100);
+        players[0].getBoard().paint(g);
+
+
+        g.drawImage(scoreCardImage, 400,300,100,400,null);
+        g.drawImage(placeImgs[players[1].getPlace(players)],400,100,100,200,null);
+
+        players[1].getBoard().setDisplay(400,800,100);
+        players[1].getBoard().paint(g);
 
 
 
 
-        g.drawImage(scoreCardImage, 0,0,100,100,null);
-        g.drawImage(placeImgs[players[1].getPlace(players)],0,0,100,100,null);
+        g.drawImage(scoreCardImage, 600,300,100,400,null);
+        g.drawImage(placeImgs[players[2].getPlace(players)],600,100,100,200,null);
+
+        players[2].getBoard().setDisplay(600,800,100);
+        players[2].getBoard().paint(g);
 
 
 
 
-        g.drawImage(scoreCardImage, 0,0,100,100,null);
-        g.drawImage(placeImgs[players[2].getPlace(players)],0,0,100,100,null);
-
-
-
-
-        scoreHandler.paint(g,0,0,0,0,0,0,0,0,0);
+        scoreHandler.paint(g,200,300,400,300,600,300,10,10,10);
 
 
 

@@ -84,7 +84,7 @@ public class StartScreen {
             confirmQuitbg = ImageIO.read(StartScreen.class.getResource("/FinalFiles/guiImages/StartScreenFinalConfirmBG.png"));
         }
         catch(Exception E) {
-            bg = null;
+            confirmQuitbg = null;
             System.out.println("STARTSCREEN: BG IMAGE NOT FOUND");
         }
 

@@ -107,6 +107,7 @@ public class GameBoard {
     public boolean placeTile(int r, int c, HabitatTile tile) {
         if (board[r][c].getEmpty()) {
             board[r][c].setTile(tile);
+            updateButtonGrid();
             //board[r][c].setEmpty(false);
             return true;
         }
@@ -1012,15 +1013,15 @@ public class GameBoard {
                     if(tile!=null&&tile.getToken()==null) {
                         switch(token.getAnimalType()) {
                             case 1:
-                                if(tile.getCanHoldBear()) {buttonGrid[r][c].setDisabled(true);}
+                                if(tile.getCanHoldBear()) {buttonGrid[r][c].setDisabled(false);}
                             case 2:
-                                if(tile.getCanHoldElk()) {buttonGrid[r][c].setDisabled(true);}
+                                if(tile.getCanHoldElk()) {buttonGrid[r][c].setDisabled(false);}
                             case 3:
-                                if(tile.getCanHoldSalmon()) {buttonGrid[r][c].setDisabled(true);}
+                                if(tile.getCanHoldSalmon()) {buttonGrid[r][c].setDisabled(false);}
                             case 4:
-                                if(tile.getCanHoldHawk()) {buttonGrid[r][c].setDisabled(true);}
+                                if(tile.getCanHoldHawk()) {buttonGrid[r][c].setDisabled(false);}
                             case 5:
-                                if(tile.getCanHoldFox()) {buttonGrid[r][c].setDisabled(true);}
+                                if(tile.getCanHoldFox()) {buttonGrid[r][c].setDisabled(false);}
 
                         }
                     }
@@ -1035,7 +1036,6 @@ public class GameBoard {
     }
 
     public void paint(Graphics g) {
-        updateButtonGrid();
         for(int r = 0, y = getStartingY()-1; r < buttonGrid.length; r++, y++){
             for(int c = 0, x = getStartingX()-1; c < buttonGrid[r].length; c++, x++){
 
