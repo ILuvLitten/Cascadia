@@ -308,68 +308,122 @@ public class TilePile {
 
 
         try {
-            HabitatTile top1 = new HabitatTile(true, 2, 2, false, true, false, false, false, topImg1);
-            HabitatTile left1 = new HabitatTile(false, 1, 5, true, true, false, true, false, leftImg1);
-            HabitatTile right1 = new HabitatTile(false, 3, 4, false, false, true, false, true, rightImg1);
-            StarterTile starter1 = new StarterTile(top1, left1, right1);
-            if(topImg1 != null && leftImg1 != null && rightImg1 != null) {
-                stPile.add(starter1);
-            }
-        }catch(Exception E) {
-            System.out.println("Starter 1 not loaded");
-        }
+        HabitatTile top1 = new HabitatTile(true, 2, 2, false, true, false, false, false, topImg1);
+    HabitatTile left1 = new HabitatTile(false, 1, 5, true, true, false, true, false, leftImg1);
+    left1.setTerrain0(1);
+    left1.setTerrain1(1);
+    left1.setTerrain2(5);
+    left1.setTerrain3(5);
+    left1.setTerrain4(5);
+    left1.setTerrain5(1);
+    HabitatTile right1 = new HabitatTile(false, 3, 4, false, false, true, false, true, rightImg1);
+    right1.setTerrain0(4);
+    right1.setTerrain1(4);
+    right1.setTerrain2(4);
+    right1.setTerrain3(3);
+    right1.setTerrain4(3);
+    right1.setTerrain5(3);
+    StarterTile starter1 = new StarterTile(top1, left1, right1);
+    if(topImg1 != null && leftImg1 != null && rightImg1 != null) {
+    stPile.add(starter1);
+    }
+}catch(Exception E) {
+        System.out.println("Starter 1 not loaded");
+}
 
 
-        try {
-            HabitatTile top2 = new HabitatTile(true, 3, 3, false, false, false, false, true, topImg2);
-            HabitatTile left2 = new HabitatTile(false, 4, 5, false, false, true, true, true, leftImg2);
-            HabitatTile right2 = new HabitatTile(false, 1, 2, true, true, false, false, false, rightImg2);
-            StarterTile starter2 = new StarterTile(top2, left2, right2);
-            if(topImg2 != null && leftImg2 != null && rightImg2 != null) {
-                stPile.add(starter2);
-            }
-        }catch(Exception E) {
-            System.out.println("Starter 2 not loaded");
-        }
+try {
+        HabitatTile top2 = new HabitatTile(true, 3, 3, false, false, false, false, true, topImg2);
+    HabitatTile left2 = new HabitatTile(false, 4, 5, false, false, true, true, true, leftImg2);
+    left2.setTerrain0(4);
+    left2.setTerrain1(4);
+    left2.setTerrain2(5);
+    left2.setTerrain3(5);
+    left2.setTerrain4(5);
+    left2.setTerrain5(4);
+    HabitatTile right2 = new HabitatTile(false, 1, 2, true, true, false, false, false, rightImg2);
+    right2.setTerrain0(2);
+    right2.setTerrain1(2);
+    right2.setTerrain2(2);
+    right2.setTerrain3(1);
+    right2.setTerrain4(1);
+    right2.setTerrain5(1);
+    StarterTile starter2 = new StarterTile(top2, left2, right2);
+    if(topImg2 != null && leftImg2 != null && rightImg2 != null) {
+    stPile.add(starter2);
+    }
+}catch(Exception E) {
+        System.out.println("Starter 2 not loaded");
+}
 
 
-        try {
-            HabitatTile top3 = new HabitatTile(true, 4, 4, false, false, false, true, false, topImg3);
-            HabitatTile left3 = new HabitatTile(false, 5, 2, false, true, true, true, false, leftImg3);
-            HabitatTile right3 = new HabitatTile(false, 1, 3, true, false, false, false, true, rightImg3);
-            StarterTile starter3 = new StarterTile(top3, left3, right3);
-            if(topImg3 != null && leftImg3 != null && rightImg3 != null) {
-                stPile.add(starter3);
-            }
-        }catch(Exception E) {
-            System.out.println("Starter 3 not loaded");
-        }
+try {
+        HabitatTile top3 = new HabitatTile(true, 4, 4, false, false, false, true, false, topImg3);
+    HabitatTile left3 = new HabitatTile(false, 5, 2, false, true, true, true, false, leftImg3);
+    left3.setTerrain0(5);
+    left3.setTerrain1(5);
+    left3.setTerrain2(2);
+    left3.setTerrain3(2);
+    left3.setTerrain4(2);
+    left3.setTerrain5(5);
+    HabitatTile right3 = new HabitatTile(false, 1, 3, true, false, false, false, true, rightImg3);
+    right3.setTerrain0(1);
+    right3.setTerrain1(1);
+    right3.setTerrain2(1);
+    right3.setTerrain3(3);
+    right3.setTerrain4(3);
+    right3.setTerrain5(3);
+    StarterTile starter3 = new StarterTile(top3, left3, right3);
+    if(topImg3 != null && leftImg3 != null && rightImg3 != null) {
+    stPile.add(starter3);
+    }
+}catch(Exception E) {
+        System.out.println("Starter 3 not loaded");
+}
 
 
-        try {
-            HabitatTile top4 = new HabitatTile(true, 1, 1, true, false, false, false, false, topImg4);
-            HabitatTile left4 = new HabitatTile(false, 2, 4, false, true, false, true, true, leftImg4);
-            HabitatTile right4 = new HabitatTile(false, 3, 5, true, false, true, false, false, rightImg4);
-            StarterTile starter4 = new StarterTile(top4, left4, right4);
-            if(topImg4 != null && leftImg4 != null && rightImg4 != null) {
-                stPile.add(starter4);
-            }
-        }catch(Exception E) {
-            System.out.println("Starter 4 not loaded");
-        }
+try {
+        HabitatTile top4 = new HabitatTile(true, 1, 1, true, false, false, false, false, topImg4);
+    HabitatTile left4 = new HabitatTile(false, 2, 4, false, true, false, true, true, leftImg4);
+    left4.setTerrain0(2);
+    left4.setTerrain1(2);
+    left4.setTerrain2(4);
+    left4.setTerrain3(4);
+    left4.setTerrain4(4);
+    left4.setTerrain5(2);
+    HabitatTile right4 = new HabitatTile(false, 3, 5, true, false, true, false, false, rightImg4);
+    right4.setTerrain0(5);
+    right4.setTerrain1(5);
+    right4.setTerrain2(5);
+    right4.setTerrain3(3);
+    right4.setTerrain4(3);
+    right4.setTerrain5(3);
+    StarterTile starter4 = new StarterTile(top4, left4, right4);
+    if(topImg4 != null && leftImg4 != null && rightImg4 != null) {
+    stPile.add(starter4);
+    }
+}catch(Exception E) {
+        System.out.println("Starter 4 not loaded");
+}
 
 
-        try {
-            HabitatTile top5 = new HabitatTile(true, 5, 5, false, false, true, false, false, topImg5);
-            HabitatTile left5 = new HabitatTile(false, 3, 2, true, true, true, false, false, leftImg5);
-            HabitatTile right5 = new HabitatTile(false, 4, 1, false, false, false, true, true, rightImg5);
-            StarterTile starter5 = new StarterTile(top5, left5, right5);
-            if(topImg5 != null && leftImg5 != null && rightImg5 != null) {
-                stPile.add(starter5);
-            }
-        }catch(Exception E) {
-            System.out.println("Starter 5 not loaded");
-        }
+try {
+        HabitatTile top5 = new HabitatTile(true, 5, 5, false, false, true, false, false, topImg5);
+    HabitatTile left5 = new HabitatTile(false, 3, 2, true, true, true, false, false, leftImg5);
+    left5.setTerrain0(3);
+    left5.setTerrain1(3);
+    left5.setTerrain2(2);
+    left5.setTerrain3(2);
+    left5.setTerrain4(2);
+    left5.setTerrain5(3);
+    HabitatTile right5 = new HabitatTile(false, 4, 1, false, false, false, true, true, rightImg5);
+    StarterTile starter5 = new StarterTile(top5, left5, right5);
+    if(topImg5 != null && leftImg5 != null && rightImg5 != null) {
+    stPile.add(starter5);
+    }
+}catch(Exception E) {
+        System.out.println("Starter 5 not loaded");
+}
 
 
 
