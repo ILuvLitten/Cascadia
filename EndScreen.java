@@ -1,0 +1,158 @@
+import java.awt.*;
+import java.awt.image.*;
+import javax.imageio.ImageIO;
+import javax.swing.*;
+import java.io.*;
+
+
+public class EndScreen{
+
+    private BufferedImage bg;
+    private Button newGameButton;
+    private Button mainMenuButton;
+
+    private int width = 0;
+    private int height = 0;
+
+    private int[] playerScores;
+
+    private BufferedImage[] placeImgs;
+    private Player[] players;
+    private Scoring scoreHandler;
+
+
+
+    private BufferedImage scoreCardImage;
+
+
+
+
+    public EndScreen(Player[] p, int w, int h) {
+
+        width = w;
+        height = h;
+        players = p;
+
+        newGameButton = new ImageButton("NewGameButton",83,433,255);
+
+
+
+        mainMenuButton = new ImageButton("MainMenuButton",905,433,255);
+
+
+        scoreHandler = new Scoring(players[0],players[1],players[2]);
+        players[0].setScore(scoreHandler.getTotal1());
+        players[1].setScore(scoreHandler.getTotal2());
+        players[2].setScore(scoreHandler.getTotal3());
+
+
+
+
+
+        try {
+            bg = ImageIO.read(EndScreen.class.getResource("/FinalFiles/guiImages/EndScreenBG.png"));
+        }
+        catch(Exception E) {
+            bg = null;
+            System.out.println("TITLESCREEN: BG IMAGE NOT FOUND");
+        }
+
+        try {
+            scoreCardImage = ImageIO.read(EndScreen.class.getResource("/FinalFiles/guiImages/PlayerScoreCardFinalIMG.png"));
+        }
+        catch(Exception E) {
+            scoreCardImage = null;
+            System.out.println("SCORECARD: BG IMAGE NOT FOUND");
+        }
+
+        placeImgs = new BufferedImage[3];
+        try {
+            placeImgs[0] = ImageIO.read(EndScreen.class.getResource("/FinalFiles/guiImages/FirstIMG.png"));
+        }
+        catch(Exception E) {
+            System.out.println("TITLESCREEN: IMAGE NOT FOUND");
+        }
+        try {
+            placeImgs[1] = ImageIO.read(EndScreen.class.getResource("/FinalFiles/guiImages/SecondIMG.png"));
+        }
+        catch(Exception E) {
+            System.out.println("TITLESCREEN: IMAGE NOT FOUND");
+        }
+        try {
+            placeImgs[2] = ImageIO.read(EndScreen.class.getResource("/FinalFiles/guiImages/ThirdIMG.png"));
+        }
+        catch(Exception E) {
+            System.out.println("TITLESCREEN: IMAGE NOT FOUND");
+        }
+
+
+
+
+    }
+
+    public void paint(Graphics g, Graphics2D g2d) {
+
+        g.drawImage(bg, 0, 0, width, height, null);
+
+        newGameButton.paint(g);
+        mainMenuButton.paint(g);
+
+        g.drawImage(scoreCardImage, 0,0,100,100,null);
+        g.drawImage(placeImgs[players[0].getPlace(players)],0,0,100,100,null);
+
+
+
+
+        g.drawImage(scoreCardImage, 0,0,100,100,null);
+        g.drawImage(placeImgs[players[1].getPlace(players)],0,0,100,100,null);
+
+
+
+
+        g.drawImage(scoreCardImage, 0,0,100,100,null);
+        g.drawImage(placeImgs[players[2].getPlace(players)],0,0,100,100,null);
+
+
+
+
+        scoreHandler.paint(g,0,0,0,0,0,0,0,0,0);
+
+
+
+
+    }
+
+    public void mouseMoved(int clickX, int clickY) {
+        newGameButton.mouseMoved(clickX, clickY);
+        mainMenuButton.mouseMoved(clickX, clickY);
+
+
+    }
+
+    public int mouseClicked(int clickX, int clickY) {
+
+        switch(newGameButton.mouseClicked(clickX,clickY)) {
+            case 0:
+                return 0;
+            case 1:
+                return 2;
+        }
+        switch(mainMenuButton.mouseClicked(clickX,clickY)) {
+            case 0:
+                return 0;
+            case 1:
+                return 3;
+        }
+
+
+
+        return -1;
+
+    }
+
+
+
+
+
+
+}

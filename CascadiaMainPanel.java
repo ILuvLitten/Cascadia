@@ -1,0 +1,186 @@
+import java.awt.*;
+import java.awt.event.*;
+import javax.swing.*;
+
+
+public class CascadiaMainPanel extends JPanel implements MouseMotionListener, MouseListener{
+    private int currentScreen = 0;
+    private int prevScreen = 0;
+    private TitleScreen titleScreen;
+    private ManualScreen manualScreen;
+    private StartScreen startScreen;
+    private GameScreen gameScreen;
+    private EndScreen endScreen;
+
+    private int width = 1200;
+    private int height = 900;
+    public CascadiaMainPanel(){
+        titleScreen = new TitleScreen(width,height);
+        manualScreen = new ManualScreen(width,height);
+        //endScreen = new EndScreen(width, height);
+        //startScreen = new StartScreen(width,height);
+        //gameScreen = new GameScreen(width,height);
+        addMouseMotionListener(this);
+        addMouseListener(this);
+    }
+
+
+    public void paint(Graphics g){
+
+        Graphics2D g2d = (Graphics2D)g;
+        super.paint(g);
+        switch(currentScreen){
+            case -1: //TEST SCREEN
+                break;
+
+            case 0: //TITLESCREEN
+                titleScreen.paint(g);
+                break;
+            case 1: // MANUAL SCREEN
+                manualScreen.paint(g);
+                break;
+            case 2: // START SCREEN
+                startScreen.paint(g);
+                break;
+            case 3: // GAME SCREEN
+                gameScreen.paint(g,g2d);
+                break;
+            case 4: // END SCREEN
+                endScreen.paint(g,g2d);
+                break;
+
+
+        }
+
+
+
+
+
+    }
+    public void mouseDragged(MouseEvent e) {
+    }
+    public void mouseMoved(MouseEvent e) {
+        switch(currentScreen){
+            case -1: //TEST SCREEN
+                break;
+
+            case 0: //TITLESCREEN
+                titleScreen.mouseMoved(e.getX(),e.getY());
+                break;
+            case 1: // MANUAL SCREEN
+                manualScreen.mouseMoved(e.getX(),e.getY());
+                break;
+            case 2: // START SCREEN
+                startScreen.mouseMoved(e.getX(),e.getY());
+                break;
+            case 3: // GAME SCREEN
+                gameScreen.mouseMoved(e.getX(),e.getY());
+                break;
+            case 4: // END SCREEN
+                endScreen.mouseMoved(e.getX(),e.getY());
+                break;
+
+        }
+
+        repaint();
+    }
+    public void mousePressed(MouseEvent e) {
+        System.out.println("\n\nX1: "+e.getX()+" Y1: "+e.getY());
+    }
+    public void mouseReleased(MouseEvent e) {
+        System.out.println("X2: "+e.getX()+" Y2: "+e.getY());
+    }
+    public void mouseEntered(MouseEvent e) {}
+    public void mouseExited(MouseEvent e) {}
+    public void mouseClicked(MouseEvent e) {
+
+        switch(currentScreen) {
+
+            case -1: // TEST SCREEN
+            case 0: // TITLE SCREEN
+                switch(titleScreen.mouseClicked(e.getX(),e.getY())) {
+                    case 1:
+                        startScreen = new StartScreen(width,height);
+                        currentScreen = 2;
+                        prevScreen = 0;
+                        break;
+                    case 2:
+
+                        currentScreen = 1;
+                        prevScreen = 0;
+                        break;
+                }
+                break;
+            case 1: // MANUAL SCREEN
+                switch(manualScreen.mouseClicked(e.getX(),e.getY())) {
+                    case 2:
+                        currentScreen = prevScreen;
+                        prevScreen = 1;
+                        break;
+                }
+                break;
+            case 2: // START SCREEN
+                switch(startScreen.mouseClicked(e.getX(),e.getY())) {
+                    case 2:
+                        currentScreen = 0;
+                        prevScreen = 2;
+                        break;
+
+                    case 3:
+                        currentScreen = 1;
+                        prevScreen = 2;
+                        break;
+
+                    case 4:
+                        gameScreen = startScreen.getGameScreen();
+                        currentScreen = 3;
+                        prevScreen = 2;
+                        break;
+                }
+                break;
+            case 3: // GAME SCREEN
+                switch(gameScreen.mouseClicked(e.getX(),e.getY())) {
+                    case 2:
+                        currentScreen = 0;
+                        prevScreen = 3;
+                        break;
+
+                    case 3:
+
+                        currentScreen = 1;
+                        prevScreen = 3;
+                        break;
+
+                    case 4:
+                        currentScreen = 4;
+                        prevScreen = 3;
+                        endScreen = gameScreen.getEndScreen();
+                        break;
+
+                }
+                break;
+            case 4: // END SCREEN
+                switch(endScreen.mouseClicked(e.getX(),e.getY())) {
+                    case 2:
+                        startScreen = new StartScreen(width,height);
+                        currentScreen = 2;
+                        prevScreen = 4;
+                        break;
+
+                    case 3:
+
+                        currentScreen = 0;
+                        prevScreen = 4;
+                        break;
+
+                }
+                break;
+        }
+
+
+        repaint();
+    }
+
+
+
+}

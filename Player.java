@@ -1,0 +1,167 @@
+import java.awt.*;
+import java.awt.image.BufferedImage;
+
+
+import javax.imageio.ImageIO;
+
+
+public class Player {
+    private GameBoard board;
+    private Score scoreCard;
+    private String name;
+    private int finalScore = 0;
+    private BufferedImage image = null;
+
+
+
+    public Player(String n, StarterTile st, int x, int y, int s) {
+        board = new GameBoard(x,y,s);
+        board.addStarterTile(st);
+        scoreCard = new Score(board);
+        name = n;
+    }
+
+    public Player(String n, StarterTile st, int x, int y, int s,String imgHeader) {
+        board = new GameBoard(x,y,s);
+        board.addStarterTile(st);
+        scoreCard = new Score(board);
+        name = n;
+        try{
+
+
+
+
+
+
+
+
+            image = ImageIO.read(Player.class.getResource("/FinalFiles/guiImages/"+imgHeader+"IMG.png"));
+
+
+
+
+
+
+
+
+        }catch(Exception E){
+
+
+
+
+
+
+
+
+            image = null;
+
+
+
+
+
+
+
+
+        }
+    }
+
+
+    public GameBoard getBoard() {
+        return board;
+    }
+
+
+    public int getNatureTokens() {
+        return board.getNatureTokens();
+    }
+
+    public Score getScoreCard() {
+        return scoreCard;
+    }
+
+
+    public String getName() {return name;}
+    public int getScore() {return finalScore;}
+    public void setScore(int s) {finalScore = s;}
+
+    public int compareTo(Player other){
+        if(finalScore>other.getScore()){
+            return 1;
+        }else if(finalScore<other.getScore()){
+            return -1;
+        }
+        else{
+            if(getNatureTokens() > other.getNatureTokens()){
+                return 1;
+            }else if(getNatureTokens() > other.getNatureTokens()){
+                return -1;
+            }else{
+                return 0;
+            }
+        }
+
+
+    }
+
+
+    public boolean equals(Player other){
+        if(name == other.getName()){
+            return true;
+        }
+        return false;
+    }
+
+
+
+
+
+
+    public int getPlace(Player[] allPlayers){
+        int place = 1;
+        for(Player p:allPlayers){
+            if(!equals(p) && compareTo(p) < 0){
+                place++;
+            }
+        }
+        return place;
+    }
+
+    public void removeNatureToken(){
+
+
+
+
+        if(getNatureTokens()>0){
+
+
+
+
+            board.setNatureTokens(board.getNatureTokens()-1);
+
+
+
+
+        }
+    }
+
+    public void paint(Graphics g, int x, int y, int w, int h){
+
+
+
+
+
+
+
+
+        g.drawImage(image,x,y,w,h,null);
+
+
+
+
+
+
+
+
+    }
+
+}
