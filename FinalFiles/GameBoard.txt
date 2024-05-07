@@ -122,6 +122,7 @@ private boolean enableState = -1;
     public boolean placeTile(int r, int c, HabitatTile tile) {
         if (board[r][c].getEmpty()) {
             board[r][c].setTile(tile);
+            updateButtonGrid();
             //board[r][c].setEmpty(false);
             return true;
         }
@@ -974,6 +975,7 @@ enableOpenTokenButtons(enableState);
     
     public Button[][] getButtonGrid(){return buttonGrid;}
     public void setDisplay(int x, int y, int s) {
+            updateButtonGrid();
             xPos = x;
             yPos = y;
             size = s;
