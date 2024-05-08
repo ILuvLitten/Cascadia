@@ -827,7 +827,7 @@ selectedToken = -1;
 
 
                                         shuffleSelectedTokens(true);
-                                        gamestate = 2;
+                                        gamestate = 3;
                                         for(Button b:pickTokens){
                                          b.setSelected(false);
                                         }
