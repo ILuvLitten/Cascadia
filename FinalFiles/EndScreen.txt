@@ -1,165 +1,196 @@
-﻿import java.awt.*;
+import java.awt.*;
 import java.awt.image.*;
 import javax.imageio.ImageIO;
 import javax.swing.*;
 import java.io.*;
+import static java.lang.System.*;
 
 
 public class EndScreen{
-        
-        private BufferedImage bg;
-        private Button newGameButton;
-        private Button mainMenuButton;
-        
-        private int width = 0;
-        private int height = 0;
-        
-        private int[] playerScores;
-        
-        private BufferedImage[] placeImgs;
-        private Player[] players;
-        private Scoring scoreHandler;
-        
+
+    private BufferedImage bg;
+    private Button newGameButton;
+    private Button mainMenuButton;
+
+    private int width = 0;
+    private int height = 0;
+
+    private int[] playerScores;
+
+    private BufferedImage[] placeImgs;
+    private Player[] players;
+    private Scoring scoreHandler;
+    
+    private int showingBoard = -1;
+    private Button[] scoreCardButtons;
+
 
 
     private BufferedImage scoreCardImage;
+
+
+
+
+    public EndScreen(Player[] p, int w, int h) {
+    	
+    	//scoreCardButtons = new Button[3];
+    	
+    	scoreCardButtons = new Button[3];
+    	scoreCardButtons[0] = new Button(336,475,125,250);
+    	scoreCardButtons[1] = new Button(540,475,125,250);
+    	scoreCardButtons[2] = new Button(736,475,125,250);
+    	
+        width = w;
+        height = h;
+        players = p;
+
+        newGameButton = new ImageButton("NewGameButton",83,433,255);
+
+
+
+        mainMenuButton = new ImageButton("MainMenuButton",905,433,255);
         
+
         
+        scoreHandler = new Scoring(players[0],players[1],players[2]);
+        players[0].setScore(scoreHandler.getTotal1());
+        players[1].setScore(scoreHandler.getTotal2());
+        players[2].setScore(scoreHandler.getTotal3());
         
-        
-        public EndScreen(Player[] p, int w, int h) {
-                
-                width = w;
-                height = h;
-                players = p;
-                
-                newGameButton = new ImageButton("NewGameButton",83,433,255);
 
 
-                
-                mainMenuButton = new ImageButton("MainMenuButton",905,433,255);
-                
-                
-                scoreHandler = new Scoring(players[0],players[1],players[2]);
-                players[0].setScore(scoreHandler.getTotal1());
-                players[1].setScore(scoreHandler.getTotal2());
-                players[2].setScore(scoreHandler.getTotal3());
-
-
-
-
-                
-                try {
-                        bg = ImageIO.read(EndScreen.class.getResource("/guiImages/EndScreenBG.png"));
-                }
-                catch(Exception E) {
-                        bg = null;
-                        System.out.println("TITLESCREEN: BG IMAGE NOT FOUND");
-                }
-                
-                try {
-                        scoreCardImage = ImageIO.read(EndScreen.class.getResource("/guiImages/PlayerScoreCardFinalIMG.png"));
-                }
-                catch(Exception E) {
-                        scoreCardImage = null;
-                        System.out.println("SCORECARD: BG IMAGE NOT FOUND");
-                }
-                
-                placeImgs = new BufferedImage[3];
-                try {
-                        placeImgs[0] = ImageIO.read(EndScreen.class.getResource("/guiImages/FirstIMG.png"));
-                }
-                catch(Exception E) {
-                        System.out.println("TITLESCREEN: IMAGE NOT FOUND");
-                }
-                try {
-                        placeImgs[1] = ImageIO.read(EndScreen.class.getResource("/guiImages/SecondIMG.png"));
-                }
-                catch(Exception E) {
-                        System.out.println("TITLESCREEN: IMAGE NOT FOUND");
-                }
-                try {
-                        placeImgs[2] = ImageIO.read(EndScreen.class.getResource("/guiImages/ThirdIMG.png"));
-                }
-                catch(Exception E) {
-                        System.out.println("TITLESCREEN: IMAGE NOT FOUND");
-                }
-                
-                
-                
-                
+        try {
+            bg = ImageIO.read(EndScreen.class.getResource("/guiImages/EndScreenBG.png"));
         }
-        
-        public void paint(Graphics g, Graphics2D g2d) {
-                
-                g.drawImage(bg, 0, 0, width, height, null);
-                
-                newGameButton.paint(g);
-                mainMenuButton.paint(g);
-                
-                g.drawImage(scoreCardImage, 200,300,100,400,null);
-                g.drawImage(placeImgs[players[0].getPlace(players)],200,100,100,200,null);
-
-players[0].getBoard().setDisplay(200,800,100);
-players[0].getBoard().paint(g);
-
-
-                g.drawImage(scoreCardImage, 400,300,100,400,null);
-                g.drawImage(placeImgs[players[1].getPlace(players)],400,100,100,200,null);
-
-players[1].getBoard().setDisplay(400,800,100);
-players[1].getBoard().paint(g);
-
-
-
-
-                g.drawImage(scoreCardImage, 600,300,100,400,null);
-                g.drawImage(placeImgs[players[2].getPlace(players)],600,100,100,200,null);
-
-players[2].getBoard().setDisplay(600,800,100);
-players[2].getBoard().paint(g);
-
-
-
-
-                scoreHandler.paint(g,200,300,400,300,600,300,10,10,10);
-                
-                
-
-
+        catch(Exception E) {
+            bg = null;
+            System.out.println("TITLESCREEN: BG IMAGE NOT FOUND");
         }
-        
-        public void mouseMoved(int clickX, int clickY) {
-                newGameButton.mouseMoved(clickX, clickY);
-                mainMenuButton.mouseMoved(clickX, clickY);
 
-
+        try {
+            scoreCardImage = ImageIO.read(EndScreen.class.getResource("/guiImages/PlayerScoreCardFinalIMG.png"));
         }
-        
-        public int mouseClicked(int clickX, int clickY) {
-                
-                switch(newGameButton.mouseClicked(clickX,clickY)) {
-                        case 0: 
-                                return 0;
-                        case 1:
-                                return 2;
-                }
-                switch(mainMenuButton.mouseClicked(clickX,clickY)) {
-                case 0: 
-                        return 0;
-                case 1:
-                        return 3;
-                }
-
-
-                
-                return -1;
-                
+        catch(Exception E) {
+            scoreCardImage = null;
+            System.out.println("SCORECARD: BG IMAGE NOT FOUND");
         }
-        
-        
-        
+
+        placeImgs = new BufferedImage[3];
+        try {
+            placeImgs[0] = ImageIO.read(EndScreen.class.getResource("/guiImages/FirstIMG.png"));
+        }
+        catch(Exception E) {
+            System.out.println("TITLESCREEN: IMAGE NOT FOUND");
+        }
+        try {
+            placeImgs[1] = ImageIO.read(EndScreen.class.getResource("/guiImages/SecondIMG.png"));
+        }
+        catch(Exception E) {
+            System.out.println("TITLESCREEN: IMAGE NOT FOUND");
+        }
+        try {
+            placeImgs[2] = ImageIO.read(EndScreen.class.getResource("/guiImages/ThirdIMG.png"));
+        }
+        catch(Exception E) {
+            System.out.println("TITLESCREEN: IMAGE NOT FOUND");
+        }
+
+
+
+
+    }
+
+    public void paint(Graphics g, Graphics2D g2d) {
+    	scoreHandler.calcAll();
+        scoreHandler.rank();
+    	out.println("nt 1: " + scoreHandler.getNT1());
+    	out.println("nt 2: " + scoreHandler.getNT2());
+    	out.println("nt 3: " + scoreHandler.getNT3());
+    	out.println("total 1: " + scoreHandler.getTotal1());
+        out.println("total 2: " + scoreHandler.getTotal2());
+        out.println("total 3: " + scoreHandler.getTotal3());
+
+        g.drawImage(bg, 0, 0, width, height, null);
+
+        newGameButton.paint(g);
+        mainMenuButton.paint(g);
+
+        g.drawImage(scoreCardImage, 540,481,125,250,null);
+        g.drawImage(placeImgs[scoreHandler.getPlayer2Place()-1],544,300,100,135,null);
+        out.println("player1 place" + scoreHandler.getPlayer1Place());
+        //players[0].getBoard().setDisplay(200,75,500);
+        //players[0].getBoard().paint(g);
+
+
+        g.drawImage(scoreCardImage, 336,481,125,250,null);
+        g.drawImage(placeImgs[scoreHandler.getPlayer1Place()-1],340,300,100,135,null);
+        out.println("player2 place" + scoreHandler.getPlayer2Place());
+        //players[1].getBoard().setDisplay(500,75,500);
+        //players[1].getBoard().paint(g);
+
         
 
+        g.drawImage(scoreCardImage, 736,481,125,250,null);
+        g.drawImage(placeImgs[scoreHandler.getPlayer3Place()-1],740,300,100,135,null);
+        out.println("player3 place" + scoreHandler.getPlayer3Place());
+        //players[2].getBoard().setDisplay(800,75,500);
+        //players[2].getBoard().paint(g);
+        
+      
+
+        g.setColor(Color.WHITE);
+        g.drawString(String.valueOf(scoreHandler.getTotal1()),400-3,768);
+        g.drawString(String.valueOf(scoreHandler.getTotal2()),600-5,768);
+        g.drawString(String.valueOf(scoreHandler.getTotal3()),800-8,768);
+
+        
+        scoreHandler.paint(g,336+10,481+10,540+10,481+10,736+10,481+10,1,1,1);
+
+        g.setColor(new Color(87, 121, 69));
+        g.drawString("(Hover over score card to see board!)", 453, 290);
+        
+        
+        if (showingBoard>-1) {
+        	players[showingBoard].getBoard().setDisplay(500,75,500);
+        	players[showingBoard].getBoard().paint(g);
+        }
+
+
+    }
+
+    public void mouseMoved(int clickX, int clickY) {
+        newGameButton.mouseMoved(clickX, clickY);
+        mainMenuButton.mouseMoved(clickX, clickY);
+        
+        showingBoard=-1;
+        for (int i=0; i<scoreCardButtons.length; i++) {
+        	if (scoreCardButtons[i].mouseMoved(clickX, clickY)) {
+        		showingBoard = i;
+        	}
+        }
+
+
+    }
+
+    public int mouseClicked(int clickX, int clickY) {
+
+        switch(newGameButton.mouseClicked(clickX,clickY)) {
+            case 0:
+                return 0;
+            case 1:
+                return 2;
+        }
+        switch(mainMenuButton.mouseClicked(clickX,clickY)) {
+            case 0:
+                return 0;
+            case 1:
+                return 3;
+        }
+
+
+
+        return -1;
+
+    }
 
 }
