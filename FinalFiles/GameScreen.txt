@@ -494,6 +494,15 @@ public class GameScreen {
                         }
                         
                         g.drawString("Choose A Token", 10, 40);
+if(currentPlayer.getNatureTokens()>0){
+
+freeSelectButton.setDisabled(false);
+                        shuffleTokensButton.setDisabled(false); 
+}else{
+freeSelectButton.setDisabled(true);
+                        shuffleTokensButton.setDisabled(true); 
+}
+
                         freeSelectButton.paint(g);
                         shuffleTokensButton.paint(g); 
                         break;
@@ -595,6 +604,12 @@ public class GameScreen {
                         
                         shuffleOverpopulatedButton.mouseMoved(clickX, clickY);
                         continueButton.mouseMoved(clickX, clickY);
+freeSelectButton.mouseMoved(clickX, clickY);
+        shuffleTokensButton.mouseMoved(clickX, clickY);
+        
+        rotateButton.mouseMoved(clickX, clickY);
+        discardButton.mouseMoved(clickX, clickY);
+
                         
                         for(Button b:pickTiles) {
                                 b.mouseMoved(clickX, clickY);
@@ -604,6 +619,7 @@ public class GameScreen {
                                 b.mouseMoved(clickX, clickY);
                         }
                         currentPlayer.getBoard().mouseMoved(clickX, clickY);
+
                         
                         
                         
