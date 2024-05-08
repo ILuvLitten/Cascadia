@@ -10,10 +10,11 @@ public class GameBoard {
     private int yPos;
     private int size;
     private int natureTokens;
+    private boolean offsetEven = false;
 
 private int lastMouseX = -1;
 private int lastMouseY = -1;
-private boolean enableState = -1;
+private int enableState = -1;
 /*
 -1 All Disabled
 0 Open Tiles Enabled
@@ -39,6 +40,18 @@ private boolean enableState = -1;
         yPos = y;
         size = s;
     }
+    
+    public GameBoard() {
+        board = new Hex[42][42];
+        for (int r=0; r<42; r++) {
+            for (int c=0; c<42; c++) {
+                board[r][c] = new Hex(r, c);
+            }
+        }
+        natureTokens = 0;
+    }
+    
+    
 
 
     public Hex[][] getBoard() {
@@ -121,6 +134,9 @@ private boolean enableState = -1;
 
     public boolean placeTile(int r, int c, HabitatTile tile) {
         if (board[r][c].getEmpty()) {
+        	if (r<getStartingY()) {
+        		offsetEven = !offsetEven;
+        	}
             board[r][c].setTile(tile);
             updateButtonGrid();
             //board[r][c].setEmpty(false);
@@ -941,7 +957,7 @@ private boolean enableState = -1;
 
             for(int r = 0; r < buttonGrid.length; r++){
             x = xPos;
-            if((r+1)%2!=0){x+=tempButton.getWidth()/2;}
+            if((!offsetEven && r%2!=0)||(offsetEven && r%2==0)){x-=tempButton.getWidth()/2;}
 
 
             for(int c = 0; c < buttonGrid[r].length; c++){
@@ -961,15 +977,15 @@ private boolean enableState = -1;
 
 
             }
-mouseMoved(lastMouseX,lastMouseY);
-
-if(enableState < 0){
-disableAllButtons()
-}else if(enableState < 1){
-enableOpenTileButtons();
-}else if(enableState < 6){
-enableOpenTokenButtons(enableState);
-}
+			mouseMoved(lastMouseX,lastMouseY);
+			
+			if(enableState < 0){
+			disableAllButtons();
+			}else if(enableState < 1){
+			enableOpenTileButtons();
+			}else if(enableState < 6){
+			enableOpenTokenButtons(enableState);
+			}
             
     }
     
@@ -1065,7 +1081,7 @@ enableState = token.getAnimalType();
             
     }
 
-enableOpenTokenButtons(int animalType) {
+public void enableOpenTokenButtons(int animalType) {
             
             /*
          * 1: bear
@@ -1075,7 +1091,7 @@ enableOpenTokenButtons(int animalType) {
          * 5: fox
          
          */
-if(token==null){return;}
+
             disableAllButtons();
 enableState = animalType;
             for(int r = 0, y = getStartingY()-1; r < buttonGrid.length; r++, y++){
@@ -1121,6 +1137,14 @@ enableState = animalType;
 
             
             buttonGrid[r][c].paint(g);
+            
+            //if (r%2==0) {
+            	//buttonGrid[r][c].paint(g);
+            //} else if ((c+1)<buttonGrid.length){
+            ////	buttonGrid[r][c+1].paint(g);
+            //}
+            
+            
             if(board[y][x].getTile() != null){
             board[y][x].getTile().paint(g,buttonGrid[r][c]);
             }
