@@ -376,14 +376,19 @@ public class HabitatTile {
     AffineTransform oldXForm = g2d.getTransform();
     g2d.setRenderingHint(RenderingHints.KEY_INTERPOLATION, RenderingHints.VALUE_INTERPOLATION_BILINEAR);
     
+    
+    
     g2d.translate(b.getXPos(), b.getYPos());
-    g2d.rotate(Math.toRadians(rotation), image.getHeight()/2, image.getWidth()/2);
+    g2d.rotate(Math.toRadians(rotation), b.getWidth()/2, b.getHeight()/2);
+    double scaleFactorX = Double.valueOf(b.getWidth())/Double.valueOf(image.getWidth());
+    double scaleFactorY = Double.valueOf(b.getHeight())/Double.valueOf(image.getHeight());
 
 
-    double scaleFactor = Double.valueOf(b.getHeight())/Double.valueOf(image.getHeight());
+    g2d.scale(scaleFactorX,scaleFactorY);
+    
 
 
-    g2d.scale(scaleFactor,scaleFactor);
+    
 
 
      
