@@ -1,4 +1,4 @@
-﻿import java.awt.*;
+import java.awt.*;
 import java.awt.geom.AffineTransform;
 import java.awt.image.BufferedImage;
 import java.io.File;
@@ -17,22 +17,6 @@ public class HabitatTile {
     private int terrain4;
     private int terrain5;
     private double rotation = 0;
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
     private int totalTerrain1;
     private int totalTerrain2;
     private boolean canHoldHawk;
@@ -76,16 +60,15 @@ public class HabitatTile {
         wetlandChecked = false;
         riverChecked = false;
     }
-
-
-    public HabitatTile(int terrain1, int terrain2, boolean canHoldBear, boolean canHoldElk, boolean canHoldSalmon, boolean canHoldHawk, boolean canHoldFox, boolean isKeystone) throws FileNotFoundException {
-        this.terrain1 = terrain2;
+    
+    public HabitatTile(boolean isKeystone, int terrain0, int terrain1, int terrain2, int terrain3, int terrain4, int terrain5, boolean canHoldBear, boolean canHoldElk, boolean canHoldSalmon, boolean canHoldHawk, boolean canHoldFox, BufferedImage image) throws FileNotFoundException {
+        this.terrain1 = terrain1;
         this.terrain2 = terrain2;
-        this.terrain3 = terrain2;
-        this.terrain0 = terrain1;
-        this.terrain4 = terrain1;
-        this.terrain5 = terrain1;
-        totalTerrain1 = terrain1;
+        this.terrain3 = terrain3;
+        this.terrain0 = terrain0;
+        this.terrain4 = terrain4;
+        this.terrain5 = terrain5;
+        totalTerrain1 = terrain5;
         totalTerrain2 = terrain2;
         this.canHoldHawk = canHoldHawk;
         this.canHoldFox = canHoldFox;
@@ -102,6 +85,32 @@ public class HabitatTile {
         wetlandChecked = false;
         riverChecked = false;
     }
+
+
+    public HabitatTile(boolean isKeystone, int terrain1, int terrain2, boolean canHoldBear, boolean canHoldElk, boolean canHoldSalmon, boolean canHoldHawk, boolean canHoldFox) throws FileNotFoundException {
+        this.terrain1 = terrain2;
+        this.terrain2 = terrain2;
+        this.terrain3 = terrain2;
+        this.terrain0 = terrain1;
+        this.terrain4 = terrain1;
+        this.terrain5 = terrain1;
+        totalTerrain1 = terrain1;
+        totalTerrain2 = terrain2;
+        this.canHoldHawk = canHoldHawk;
+        this.canHoldFox = canHoldFox;
+        this.canHoldBear = canHoldBear;
+        this.canHoldSalmon = canHoldSalmon;
+        this.canHoldElk = canHoldElk;
+        this.isKeystone = isKeystone;
+        this.containsAnimal = false;
+        this.token = null;
+        mountainChecked = false;
+        forestChecked = false;
+        prairieChecked = false;
+        wetlandChecked = false;
+        riverChecked = false;
+    }
+    
 
 
     public int getTotalTerrain1() {
@@ -327,6 +336,30 @@ public class HabitatTile {
         BufferedImage rotated = new BufferedImage(neww, newh, bimg.getType());
         
         return rotated;
+    }
+    
+    public void setTerrain0(int x) {
+    	terrain0 = x;
+    }
+    
+    public void setTerrain1(int x) {
+    	terrain1 = x;
+    }
+    
+    public void setTerrain2(int x) {
+    	terrain2 = x;
+    }
+    
+    public void setTerrain3(int x) {
+    	terrain3 = x;
+    }
+    
+    public void setTerrain4(int x) {
+    	terrain4 = x;
+    }
+    
+    public void setTerrain5(int x) {
+    	terrain5 = x;
     }
 
 
