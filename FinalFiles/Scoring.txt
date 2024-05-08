@@ -1,4 +1,4 @@
-﻿import java.util.ArrayList;
+import java.util.ArrayList;
 import static java.lang.System.*;
 import java.awt.*;
 import java.util.TreeSet;
@@ -25,9 +25,17 @@ public class Scoring {
    private int first, second, third;
    private boolean firstSecondTie, secondThirdTie, threeWayTie;
    public Scoring(Player one, Player two, Player three) {
+	   one.getScoreCard().calculateAll();
+	   two.getScoreCard().calculateAll();
+	   three.getScoreCard().calculateAll();
        player1 = one;
        player2 = two;
        player3 = three;
+       
+	   //player1.getScoreCard().calculateAll();
+	   //player2.getScoreCard().calculateAll();
+	   //player3.getScoreCard().calculateAll();
+	   
        board1 = one.getBoard();
        board2 = two.getBoard();
        board3 = three.getBoard();
@@ -61,9 +69,9 @@ public class Scoring {
        riverScore1 = one.getScoreCard().getRiverScore();
        riverScore2 = two.getScoreCard().getRiverScore();
        riverScore3 = three.getScoreCard().getRiverScore();
-       natureTokens1 = one.getScoreCard().getNatureTokens();
-       natureTokens2 = two.getScoreCard().getNatureTokens();
-       natureTokens3 = three.getScoreCard().getNatureTokens();
+       natureTokens1 = one.getNatureTokens();
+       natureTokens2 = two.getNatureTokens();
+       natureTokens3 = three.getNatureTokens();
        mountainExtra1 = 0;
        mountainExtra2 = 0;
        mountainExtra3 = 0;
@@ -82,13 +90,47 @@ public class Scoring {
        totalScore1 = 0;
        totalScore2 = 0;
        totalScore3 = 0;
-       calcAll();
-       rank();
    }
    public void calcAll() {
        calcPlayer1();
        calcPlayer2();
        calcPlayer3();
+   }
+   public int getPlayer1Place() {
+	   if (first == 1) {
+		   return 1;
+	   } else if (second == 1) {
+		   return 2;
+	   } else {
+		   return 3;
+	   }
+   }
+   public int getPlayer2Place() {
+	   if (first == 2) {
+		   return 1;
+	   } else if (second == 2) {
+		   return 2;
+	   } else {
+		   return 3;
+	   }
+   }
+   public int getPlayer3Place() {
+	   if (first == 3) {
+		   return 1;
+	   } else if (second == 3) {
+		   return 2;
+	   } else {
+		   return 3;
+	   }
+   }
+   public int getNT1() {
+	   return natureTokens1;
+   }
+   public int getNT2() {
+	   return natureTokens2;
+   }
+   public int getNT3() {
+	   return natureTokens3;
    }
    public int getTotal1() {
        return totalScore1;
@@ -110,7 +152,7 @@ public class Scoring {
        return third;
    }
    //player specific calculation methods
-   public int calcPlayer1() {
+   public void calcPlayer1() {
        int c = 0;
        c += bearScore1 + elkScore1 + salmonScore1 + hawkScore1 + foxScore1;
        c += mountainScore1 + forestScore1 + prairieScore1 + wetlandScore1 + riverScore1;
@@ -164,9 +206,8 @@ public class Scoring {
        c += mountainExtra1 + forestExtra1 + prairieExtra1 + wetlandExtra1 + riverExtra1;
        c += natureTokens1;
        totalScore1 = c;
-       return c;
    }
-   public int calcPlayer2() {
+   public void calcPlayer2() {
        int c = 0;
        c += bearScore2 + elkScore2 + salmonScore2 + hawkScore2 + foxScore2;
        c += mountainScore2 + forestScore2 + prairieScore2 + wetlandScore2 + riverScore2;
@@ -220,9 +261,8 @@ public class Scoring {
        c += mountainExtra2 + forestExtra2 + prairieExtra2 + wetlandExtra2 + riverExtra2;
        c += natureTokens2;
        totalScore2 = c;
-       return c;
    }
-   public int calcPlayer3() {
+   public void calcPlayer3() {
        int c = 0;
        c += bearScore3 + elkScore3 + salmonScore3 + hawkScore3 + foxScore3;
        c += mountainScore3 + forestScore3 + prairieScore3 + wetlandScore3 + riverScore3;
@@ -275,7 +315,6 @@ public class Scoring {
        c += mountainExtra3 + forestExtra3 + prairieExtra3 + wetlandExtra3 + riverExtra3;
        c += natureTokens3;
        totalScore3 = c;
-       return c;
    }
    public void rank() {
        if (totalScore1 > totalScore2 && totalScore1 > totalScore3) {
@@ -635,85 +674,85 @@ public class Scoring {
        g.setColor(Color.BLACK);
                 
        //prints player 1 scoring card
-                Font font1 = new Font("SansSerif", Font.PLAIN,10*sf1);
+                Font font1 = new Font("SansSerif", Font.BOLD,20*sf1);
                 g.setFont(font1);
-                g.drawString(String.valueOf(bearScore1), startingX1+33*sf1, startingY1+10*sf1);
-                g.drawString(String.valueOf(elkScore1), startingX1+33*sf1, startingY1+30*sf1);
-                g.drawString(String.valueOf(salmonScore1), startingX1+33*sf1, startingY1+51*sf1);
-                g.drawString(String.valueOf(hawkScore1), startingX1+33*sf1, startingY1+72*sf1);
-                g.drawString(String.valueOf(foxScore1), startingX1+33*sf1, startingY1+92*sf1);
-                g.drawString(String.valueOf(bearScore1+elkScore1+salmonScore1+hawkScore1+foxScore1), startingX1+33*sf1, startingY1+114*sf1);
+                g.drawString(String.valueOf(bearScore1), startingX1+30*sf1, startingY1+12*sf1);
+                g.drawString(String.valueOf(elkScore1), startingX1+30*sf1, startingY1+40*sf1);
+                g.drawString(String.valueOf(salmonScore1), startingX1+30*sf1, startingY1+68*sf1);
+                g.drawString(String.valueOf(hawkScore1), startingX1+30*sf1, startingY1+96*sf1);
+                g.drawString(String.valueOf(foxScore1), startingX1+30*sf1, startingY1+124*sf1);
+                g.drawString(String.valueOf(bearScore1+elkScore1+salmonScore1+hawkScore1+foxScore1), startingX1+30*sf1, startingY1+155*sf1);
+              
+                g.drawString(String.valueOf(mountainScore1+mountainExtra1+forestScore1+forestExtra1+prairieScore1+prairieExtra1+wetlandScore1+wetlandExtra1+riverScore1+riverExtra1), startingX1+91*sf1, startingY1+156*sf1);
                 
-                g.drawString(String.valueOf(mountainScore1+mountainExtra1+forestScore1+forestExtra1+prairieScore1+prairieExtra1+wetlandScore1+wetlandExtra1+riverScore1+riverExtra1), startingX1+87*sf1, startingY1+116*sf1);
+                g.drawString(String.valueOf(natureTokens1), startingX1+76*sf1, startingY1+197*sf1);
                 
-                g.drawString(String.valueOf(natureTokens1), startingX1+62*sf1, startingY1+137*sf1);
-                
-                Font font2 = new Font("SansSerif", Font.PLAIN,8*sf1);
+                Font font2 = new Font("SansSerif", Font.BOLD,16*sf1);
                 g.setFont(font2);
-                g.drawString(String.valueOf(mountainScore1), startingX1+82*sf1, startingY1+6*sf1);
-                g.drawString(String.valueOf(forestScore1), startingX1+82*sf1, startingY1+25*sf1);
-                g.drawString(String.valueOf(prairieScore1), startingX1+82*sf1, startingY1+46*sf1);
-                g.drawString(String.valueOf(wetlandScore1), startingX1+82*sf1, startingY1+68*sf1);
-                g.drawString(String.valueOf(riverScore1), startingX1+82*sf1, startingY1+90*sf1);
+                g.drawString(String.valueOf(mountainScore1), startingX1+88*sf1, startingY1+5*sf1);
+                g.drawString(String.valueOf(forestScore1), startingX1+88*sf1, startingY1+35*sf1);
+                g.drawString(String.valueOf(prairieScore1), startingX1+88*sf1, startingY1+65*sf1);
+                g.drawString(String.valueOf(wetlandScore1), startingX1+88*sf1, startingY1+95*sf1);
+                g.drawString(String.valueOf(riverScore1), startingX1+88*sf1, startingY1+125*sf1);
                 
-                g.drawString(String.valueOf(mountainExtra1), startingX1+95*sf1, startingY1+12*sf1);
-                g.drawString(String.valueOf(forestExtra1), startingX1+95*sf1, startingY1+35*sf1);
-                g.drawString(String.valueOf(prairieExtra1), startingX1+95*sf1, startingY1+57*sf1);
-                g.drawString(String.valueOf(wetlandExtra1), startingX1+95*sf1, startingY1+77*sf1);
-                g.drawString(String.valueOf(riverExtra1), startingX1+95*sf1, startingY1+100*sf1);
+                g.drawString(String.valueOf(mountainExtra1), startingX1+103*sf1, startingY1+12*sf1);
+                g.drawString(String.valueOf(forestExtra1), startingX1+103*sf1, startingY1+42*sf1);
+                g.drawString(String.valueOf(prairieExtra1), startingX1+103*sf1, startingY1+72*sf1);
+                g.drawString(String.valueOf(wetlandExtra1), startingX1+103*sf1, startingY1+102*sf1);
+                g.drawString(String.valueOf(riverExtra1), startingX1+103*sf1, startingY1+132*sf1);
        //prints player 2 scoring card
-       Font font3 = new Font("SansSerif", Font.PLAIN,10*sf2);
+       Font font3 = new Font("SansSerif", Font.BOLD,20*sf2);
                 g.setFont(font3);
-                g.drawString(String.valueOf(bearScore2), startingX2+33*sf2, startingY2+10*sf2);
-                g.drawString(String.valueOf(elkScore2), startingX2+33*sf2, startingY2+30*sf2);
-                g.drawString(String.valueOf(salmonScore2), startingX2+33*sf2, startingY2+51*sf2);
-                g.drawString(String.valueOf(hawkScore2), startingX2+33*sf2, startingY2+72*sf2);
-                g.drawString(String.valueOf(foxScore2), startingX2+33*sf2, startingY2+92*sf2);
-                g.drawString(String.valueOf(bearScore2+elkScore2+salmonScore2+hawkScore2+foxScore2), startingX2+33*sf2, startingY2+114*sf2);
+                g.drawString(String.valueOf(bearScore2), startingX2+30*sf2, startingY2+12*sf2);
+                g.drawString(String.valueOf(elkScore2), startingX2+30*sf2, startingY2+40*sf2);
+                g.drawString(String.valueOf(salmonScore2), startingX2+30*sf2, startingY2+68*sf2);
+                g.drawString(String.valueOf(hawkScore2), startingX2+30*sf2, startingY2+96*sf2);
+                g.drawString(String.valueOf(foxScore2), startingX2+30*sf2, startingY2+124*sf2);
+                g.drawString(String.valueOf(bearScore2+elkScore2+salmonScore2+hawkScore2+foxScore2), startingX2+30*sf2, startingY2+155*sf2);
                 
-                g.drawString(String.valueOf(mountainScore2+mountainExtra2+forestScore2+forestExtra2+prairieScore2+prairieExtra2+wetlandScore2+wetlandExtra2+riverScore2+riverExtra2), startingX2+87*sf2, startingY2+116*sf2);
+                g.drawString(String.valueOf(mountainScore2+mountainExtra2+forestScore2+forestExtra2+prairieScore2+prairieExtra2+wetlandScore2+wetlandExtra2+riverScore2+riverExtra2), startingX2+91*sf2, startingY2+156*sf2);
                 
-                g.drawString(String.valueOf(natureTokens2), startingX2+62*sf2, startingY2+137*sf2);
+                g.drawString(String.valueOf(natureTokens2), startingX2+76*sf2, startingY2+197*sf2);
                 
-                Font font4 = new Font("SansSerif", Font.PLAIN,8*sf2);
+                Font font4 = new Font("SansSerif", Font.BOLD,16*sf2);
                 g.setFont(font4);
-                g.drawString(String.valueOf(mountainScore2), startingX2+82*sf2, startingY2+6*sf2);
-                g.drawString(String.valueOf(forestScore2), startingX2+82*sf2, startingY2+25*sf2);
-                g.drawString(String.valueOf(prairieScore2), startingX2+82*sf2, startingY2+46*sf2);
-                g.drawString(String.valueOf(wetlandScore2), startingX2+82*sf2, startingY2+68*sf2);
-                g.drawString(String.valueOf(riverScore2), startingX2+82*sf2, startingY2+90*sf2);
+                g.drawString(String.valueOf(mountainScore2), startingX2+88*sf2, startingY2+5*sf2);
+                g.drawString(String.valueOf(forestScore2), startingX2+88*sf2, startingY2+35*sf2);
+                g.drawString(String.valueOf(prairieScore2), startingX2+88*sf2, startingY2+65*sf2);
+                g.drawString(String.valueOf(wetlandScore2), startingX2+88*sf2, startingY2+95*sf2);
+                g.drawString(String.valueOf(riverScore2), startingX2+88*sf2, startingY2+125*sf2);
                 
-                g.drawString(String.valueOf(mountainExtra2), startingX2+95*sf2, startingY2+12*sf2);
-                g.drawString(String.valueOf(forestExtra2), startingX2+95*sf2, startingY2+35*sf2);
-                g.drawString(String.valueOf(prairieExtra2), startingX2+95*sf2, startingY2+57*sf2);
-                g.drawString(String.valueOf(wetlandExtra2), startingX2+95*sf2, startingY2+77*sf2);
-                g.drawString(String.valueOf(riverExtra2), startingX2+95*sf2, startingY2+100*sf2);
+                g.drawString(String.valueOf(mountainExtra2), startingX2+103*sf2, startingY2+12*sf2);
+                g.drawString(String.valueOf(forestExtra2), startingX2+103*sf2, startingY2+42*sf2);
+                g.drawString(String.valueOf(prairieExtra2), startingX2+103*sf2, startingY2+72*sf2);
+                g.drawString(String.valueOf(wetlandExtra2), startingX2+103*sf2, startingY2+102*sf2);
+                g.drawString(String.valueOf(riverExtra2), startingX2+103*sf2, startingY2+132*sf2);
        //prints player 3 scoring card
-       Font font5 = new Font("SansSerif", Font.PLAIN,10*sf3);
+       Font font5 = new Font("SansSerif", Font.BOLD,20*sf3);
                 g.setFont(font5);
-                g.drawString(String.valueOf(bearScore3), startingX3+33*sf3, startingY3+10*sf3);
-                g.drawString(String.valueOf(elkScore3), startingX3+33*sf3, startingY2+30*sf3);
-                g.drawString(String.valueOf(salmonScore3), startingX3+33*sf3, startingY2+51*sf3);
-                g.drawString(String.valueOf(hawkScore3), startingX3+33*sf3, startingY2+72*sf3);
-                g.drawString(String.valueOf(foxScore3), startingX3+33*sf3, startingY2+92*sf3);
-                g.drawString(String.valueOf(bearScore3+elkScore3+salmonScore3+hawkScore3+foxScore3), startingX3+33*sf3, startingY3+114*sf3);
+                g.drawString(String.valueOf(bearScore3), startingX3+30*sf3, startingY3+12*sf3);
+                g.drawString(String.valueOf(elkScore3), startingX3+30*sf3, startingY2+40*sf3);
+                g.drawString(String.valueOf(salmonScore3), startingX3+30*sf3, startingY2+68*sf3);
+                g.drawString(String.valueOf(hawkScore3), startingX3+30*sf3, startingY2+96*sf3);
+                g.drawString(String.valueOf(foxScore3), startingX3+30*sf3, startingY2+124*sf3);
+                g.drawString(String.valueOf(bearScore3+elkScore3+salmonScore3+hawkScore3+foxScore3), startingX3+30*sf3, startingY3+155*sf3);
                 
-                g.drawString(String.valueOf(mountainScore3+mountainExtra3+forestScore3+forestExtra3+prairieScore3+prairieExtra3+wetlandScore3+wetlandExtra3+riverScore3+riverExtra3), startingX3+87*sf3, startingY3+116*sf3);
+                g.drawString(String.valueOf(mountainScore3+mountainExtra3+forestScore3+forestExtra3+prairieScore3+prairieExtra3+wetlandScore3+wetlandExtra3+riverScore3+riverExtra3), startingX3+91*sf3, startingY3+156*sf3);
                 
-                g.drawString(String.valueOf(natureTokens3), startingX3+62*sf3, startingY3+137*sf3);
+                g.drawString(String.valueOf(natureTokens3), startingX3+76*sf3, startingY3+197*sf3);
                 
-                Font font6 = new Font("SansSerif", Font.PLAIN,8*sf3);
+                Font font6 = new Font("SansSerif", Font.BOLD,16*sf3);
                 g.setFont(font6);
-                g.drawString(String.valueOf(mountainScore3), startingX3+82*sf3, startingY3+6*sf3);
-                g.drawString(String.valueOf(forestScore3), startingX3+82*sf3, startingY3+25*sf3);
-                g.drawString(String.valueOf(prairieScore3), startingX3+82*sf3, startingY3+46*sf3);
-                g.drawString(String.valueOf(wetlandScore3), startingX3+82*sf3, startingY3+68*sf3);
-                g.drawString(String.valueOf(riverScore3), startingX3+82*sf3, startingY3+90*sf3);
+                g.drawString(String.valueOf(mountainScore3), startingX3+88*sf3, startingY3+5*sf3);
+                g.drawString(String.valueOf(forestScore3), startingX3+88*sf3, startingY3+35*sf3);
+                g.drawString(String.valueOf(prairieScore3), startingX3+88*sf3, startingY3+65*sf3);
+                g.drawString(String.valueOf(wetlandScore3), startingX3+88*sf3, startingY3+95*sf3);
+                g.drawString(String.valueOf(riverScore3), startingX3+88*sf3, startingY3+125*sf3);
                 
-                g.drawString(String.valueOf(mountainExtra3), startingX3+95*sf3, startingY3+12*sf3);
-                g.drawString(String.valueOf(forestExtra3), startingX3+95*sf3, startingY3+35*sf3);
-                g.drawString(String.valueOf(prairieExtra3), startingX3+95*sf3, startingY3+57*sf3);
-                g.drawString(String.valueOf(wetlandExtra3), startingX3+95*sf3, startingY3+77*sf3);
-                g.drawString(String.valueOf(riverExtra3), startingX3+95*sf3, startingY3+100*sf3);
+                g.drawString(String.valueOf(mountainExtra3), startingX3+103*sf3, startingY3+12*sf3);
+                g.drawString(String.valueOf(forestExtra3), startingX3+103*sf3, startingY3+42*sf3);
+                g.drawString(String.valueOf(prairieExtra3), startingX3+103*sf3, startingY3+72*sf3);
+                g.drawString(String.valueOf(wetlandExtra3), startingX3+103*sf3, startingY3+102*sf3);
+                g.drawString(String.valueOf(riverExtra3), startingX3+103*sf3, startingY3+132*sf3);
         }
 }
